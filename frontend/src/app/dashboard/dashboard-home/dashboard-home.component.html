@@ -9,53 +9,73 @@
   </div>
 
    <!-- Data visualizations -->
-  <!-- <div class="dashboard-charts">
+  <div class="dashboard-charts">
     <section class="chart-section">
-      <h3>Monthly RFQs Trend</h3>
-      <ngx-charts-bar-vertical
-        [results]="monthlyRFQs"
-        [xAxis]="true"
-        [yAxis]="true"
-        [gradient]="false"
-        [showXAxisLabel]="true"
-        [showYAxisLabel]="true"
-        xAxisLabel="Month"
-        yAxisLabel="RFQs"
-        [scheme]="colorSchemePO">
-      </ngx-charts-bar-vertical>
-    </section>
+  <h3>Monthly RFQs Trend</h3>
+  <div class="chart-wrapper">
+    <ngx-charts-bar-vertical
+      [results]="monthlyRFQs"
+      [xAxis]="true"
+      [yAxis]="true"
+      [gradient]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      xAxisLabel="Month"
+      yAxisLabel="RFQs"
+      [scheme]="colorSchemePO"
+      [animations]="true"
+      [barPadding]="8"
+      [roundEdges]="true">
+    </ngx-charts-bar-vertical>
+  </div>
+</section>
 
     <section class="chart-section">
-      <h3>PO Status</h3>
-      <ngx-charts-pie-chart
+      <h3>Purchase Orders Status</h3>
+       <div class="chart-wrapper">
+       <ngx-charts-pie-chart
         [results]="poStatusData"
-        [legend]="true"
         [explodeSlices]="false"
         [labels]="true"
         [doughnut]="true"
         [scheme]="colorSchemePO">
       </ngx-charts-pie-chart>
+       </div>
     </section>
 
     <section class="chart-section">
       <h3>Delivery Rate</h3>
-      <ngx-charts-pie-chart
-        [results]="deliveryRateData"
+      <div class="chart-wrapper">
+        <ngx-charts-line-chart
+        [results]="deliveryLineTrend"
+        [scheme]="colorSchemeDelivery"
+        [xAxis]="true"
+        [yAxis]="true"
         [legend]="true"
-        [labels]="true"
-        [doughnut]="true"
-        [scheme]="colorSchemeDelivery">
-      </ngx-charts-pie-chart>
+        [autoScale]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Month"
+        yAxisLabel="Deliveries"
+        [animations]="true"
+        [timeline]="true"
+        [showGridLines]="true">
+      </ngx-charts-line-chart>
+      </div>  
     </section>
 
     <section class="chart-section">
        <h3>Invoice Status</h3>
-      <ngx-charts-pie-chart
+       <div class="chart-wrapper">
+        <ngx-charts-pie-chart
         [results]="invoiceStatusData"
-        [legend]="true"
+        [explodeSlices]="false"
         [labels]="true"
         [doughnut]="true"
-        [scheme]="colorSchemeInvoice">
+        [scheme]="colorSchemeInvoice"
+        [arcWidth]="0.3"
+        [animations]="true">
       </ngx-charts-pie-chart>
-    </section> -->
+       </div>
+    </section>
 </div>

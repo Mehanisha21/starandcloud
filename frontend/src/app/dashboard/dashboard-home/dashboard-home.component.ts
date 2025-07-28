@@ -39,56 +39,76 @@ export class DashboardHomeComponent implements OnInit {
     }
   }
 
-  // monthlyRFQs = [
-  //   { name: 'Jan', value: 10 },
-  //   { name: 'Feb', value: 14 },
-  //   { name: 'Mar', value: 9 },
-  //   { name: 'Apr', value: 15 },
-  //   { name: 'May', value: 20 },
-  //   { name: 'Jun', value: 13 }
-  // ];
+  monthlyRFQs = [
+    { name: 'Jan', value: 10 },
+    { name: 'Feb', value: 14 },
+    { name: 'Mar', value: 9 },
+    { name: 'Apr', value: 15 },
+    { name: 'May', value: 20 },
+    { name: 'Jun', value: 13 }
+  ];
 
-  // poStatusData = [
-  //   { name: 'Completed', value: 8 },
-  //   { name: 'In Progress', value: 3 },
-  //   { name: 'Cancelled', value: 1 }
-  // ];
+  poStatusData = [
+    { name: 'Completed', value: 8 },
+    { name: 'In Progress', value: 3 },
+    { name: 'Cancelled', value: 1 }
+  ];
 
-  // deliveryRateData = [
-  //   { name: 'On Time', value: 96 },
-  //   { name: 'Late', value: 4 }
-  // ];
+  deliveryLineTrend = [
+  {
+    name: 'On Time',
+    series: [
+      { name: 'Jan', value: 26 },
+      { name: 'Feb', value: 27 },
+      { name: 'Mar', value: 29 },
+      { name: 'Apr', value: 31 },
+      { name: 'May', value: 28 }
+      // add more months/data as needed
+    ]
+  },
+  {
+    name: 'Late',
+    series: [
+      { name: 'Jan', value: 4 },
+      { name: 'Feb', value: 6 },
+      { name: 'Mar', value: 3 },
+      { name: 'Apr', value: 2 },
+      { name: 'May', value: 5 }
+    ]
+  }
+];
 
-  // invoiceStatusData = [
-  //   { name: 'Paid', value: 18 },
-  //   { name: 'Pending', value: 4 },
-  //   { name: 'Overdue', value: 2 }
-  // ];
 
-  // colorSchemePO: Color = {
-  //   name: 'po',
-  //   selectable: true,
-  //   group: ScaleType.Ordinal,
-  //   domain: ['#43a047', '#fb8c00', '#d32f2f']
-  // };
+  invoiceStatusData = [
+    { name: 'Paid', value: 18 },
+    { name: 'Pending', value: 4 },
+    { name: 'Overdue', value: 2 }
+  ];
 
-  // colorSchemeDelivery: Color = {
-  //   name: 'delivery',
-  //   selectable: true,
-  //   group: ScaleType.Ordinal,
-  //   domain: ['#43a047', '#d32f2f']
-  // };
+  colorSchemePO: Color = {
+    name: 'po',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#43a047', '#fb8c00', '#d32f2f']
+  };
 
-  // colorSchemeInvoice: Color = {
-  //   domain: ['#43a047', '#fcbb03', '#d32f2f'],
-  //   name: 'customInvoice',
-  //   selectable: true,
-  //   group: ScaleType.Ordinal
-  // };
-  // colorSchemeRFQ: Color = {
-  //   domain: ['#2d81f7', '#72e7fd'],
-  //   name: 'customRFQ',
-  //   selectable: true,
-  //   group: ScaleType.Ordinal
-  // };
+  colorSchemeDelivery: Color = {
+    name: 'delivery',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#43a047', '#d32f2f']
+  };
+
+  colorSchemeInvoice: Color = {
+    domain: ['#43a047', '#fcbb03', '#d32f2f'],
+    name: 'customInvoice',
+    selectable: true,
+    group: ScaleType.Ordinal
+  };
+  colorSchemeRFQ: Color = {
+    domain: ['#2d81f7', '#72e7fd'],
+    name: 'customRFQ',
+    selectable: true,
+    group: ScaleType.Ordinal
+  };
 }
