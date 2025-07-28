@@ -1,0 +1,67 @@
+.goods-receipt-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--main-content, #fff);
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(25,60,90,0.1);
+}
+
+.goods-receipt-table {
+  width: 100%;
+  border-collapse: collapse; /* This is crucial for single borders between cells */
+  background: transparent;
+  margin-bottom: 8px;
+}
+
+.goods-receipt-table th,
+.goods-receipt-table td {
+  padding: 12px 18px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #ccc; /* Added vertical line */
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Remove border from the last column to avoid an extra line on the right edge */
+.goods-receipt-table th:last-child,
+.goods-receipt-table td:last-child {
+  border-right: none;
+}
+
+.goods-receipt-table th {
+  background: var(--nav-bg, #225);
+  color: var(--button-text, #fff);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.goods-receipt-table tbody tr:hover {
+  background-color: #eef2fd;
+}
+
+/* Optional: Specific styling for date columns if still cramped */
+/* Assuming 'Posting Date' and 'Document Date' are the 3rd and 4th columns */
+.goods-receipt-table th:nth-child(3),
+.goods-receipt-table td:nth-child(3),
+.goods-receipt-table th:nth-child(4),
+.goods-receipt-table td:nth-child(4) {
+  min-width: 110px;
+}
+
+.no-data-msg {
+  text-align: center;
+  margin: 48px 0;
+  color: var(--text-color, #2a3255);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.goods-receipt-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

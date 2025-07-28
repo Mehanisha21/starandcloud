@@ -1,0 +1,7 @@
+<header class="top-nav">
+  <div class="top-nav__appname">Vendor Portal Dashboard</div>
+  <button class="top-nav__theme-toggle" (click)="toggleDarkMode()" aria-label="Toggle dark/light mode">
+    <span *ngIf="!isDarkMode" class="material-icons">dark_mode</span>
+    <span *ngIf="isDarkMode" class="material-icons">light_mode</span>
+  </button>
+</header>

@@ -1,0 +1,35 @@
+.layout-root {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+}
+
+/* Top navigation bar */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 72px;
+  right: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: left 0.26s cubic-bezier(.52,.02,.56,1.03);
+}
+
+/* When sidebar opens, top-nav shifts right */
+.top-nav.open {
+  left: 240px;
+
+}
+
+/* Main content area */
+.main-pane {
+  padding-top: 100px;
+  flex: 1;
+  background: var(--main-bg-gradient);
+  transition: margin-left 0.26s cubic-bezier(.52,.02,.56,1.03);
+}
+
+/* Main content shift when sidebar opens */
+.sidebar-contrasty.open ~ .main-pane,
+.main-pane.open {
+  margin-left: 220px;
+}

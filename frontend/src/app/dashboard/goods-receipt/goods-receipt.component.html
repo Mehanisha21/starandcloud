@@ -1,0 +1,51 @@
+<div class="goods-receipt-container">
+  <h2>Goods Receipts</h2>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    Loading goods receipts...
+  </div>
+
+  <div *ngIf="errorMsg" class="error-message">
+    {{ errorMsg }}
+    <button (click)="fetchGoodsReceipts()">Retry</button>
+  </div>
+
+  <div *ngIf="!isLoading && goodsReceipts.length > 0" class="goods-receipt-table-wrapper">
+    <table class="goods-receipt-table">
+      <thead>
+        <tr>
+          <th>Document No</th>
+          <th>Vendor ID</th>
+          <th>Posting Date</th>
+          <th>Document Date</th>
+          <th>Document Type</th>
+          <th>Purchase Order No</th>
+          <th>PO Item</th>
+          <th>Material No</th>
+          <th>Description</th>
+          <th>Movement Type</th>
+          <th>Unit of Measure</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let receipt of goodsReceipts">
+          <td>{{ receipt.documentNo }}</td>
+          <td>{{ receipt.vendorId }}</td>
+          <td>{{ receipt.postingDate | date:'mediumDate' }}</td>
+          <td>{{ receipt.documentDate | date:'mediumDate' }}</td>
+          <td>{{ receipt.documentType }}</td>
+          <td>{{ receipt.purchaseOrderNo }}</td>
+          <td>{{ receipt.purchaseOrderItem }}</td>
+          <td>{{ receipt.materialNo }}</td>
+          <td>{{ receipt.description }}</td>
+          <td>{{ receipt.movementType }}</td>
+          <td>{{ receipt.unitOfMeasure }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!isLoading && goodsReceipts.length === 0 && !errorMsg" class="no-data-message">
+    No goods receipts to display.
+  </div>
+</div>

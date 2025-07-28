@@ -1,0 +1,46 @@
+<div class="login-wrapper">
+  <div class="overlay"></div>
+  <div class="login-card">
+    <h2>
+      Vendor Portal
+    </h2>
+    <p class="subtitle">Login to continue</p>
+    <div class="error" *ngIf="apiError" style="font-size: 15px;">{{ apiError }}</div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="vendorId"><span class="icon">👤</span> Username</label>
+        <input type="text" id="vendorId" formControlName="vendorId" placeholder="Enter username"
+          [class.invalid]="vendorId?.invalid && (vendorId?.dirty || vendorId?.touched)" required />
+        <div class="error" *ngIf="vendorId?.invalid && (vendorId?.dirty || vendorId?.touched)">
+          <div *ngIf="vendorId?.errors?.['required']">Username is required.</div>
+          <div *ngIf="vendorId?.errors?.['minlength']">Minimum 10 characters.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="vendorPassword"><span class="icon">🔒</span> Password</label>
+        <div class="password-input-wrapper">
+          <input [type]="hidePassword ? 'password' : 'text'" id="vendorPassword" formControlName="vendorPassword" placeholder="Enter password"
+            [class.invalid]="vendorPassword?.invalid && (vendorPassword?.dirty || vendorPassword?.touched)" required />
+          <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword" tabindex="-1" aria-label="Toggle password visibility">
+            <svg *ngIf="hidePassword" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#46494c" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/>
+            </svg>
+            <svg *ngIf="!hidePassword" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#46494c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <line x1="4" y1="4" x2="20" y2="20" />
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="error" *ngIf="vendorPassword?.invalid && (vendorPassword?.dirty || vendorPassword?.touched)">
+          <div *ngIf="vendorPassword?.errors?.['required']">Password is required.</div>
+          <div *ngIf="vendorPassword?.errors?.['minlength']">Minimum 3 characters.</div>
+        </div>
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid || loading">Sign In</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+.financial-sheet-container {
+  max-width: 1200px; /* Adjusted max-width for better horizontal space utilization */
+  margin: auto;
+  padding: 24px;
+  background: var(--main-content);
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1);
+}
+.tab-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.tab-buttons button {
+  padding: 12px 24px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: #f0f0f0;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.tab-buttons button.active {
+  background: var(--accent);
+  color: white;
+}
+
+/* New styles for the header and PDF button */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Adjust spacing as needed */
+}
+
+.section-header h3 {
+    margin-top: 0;
+    margin-bottom: 0; /* Remove default bottom margin to align with button */
+    font-size: 22px;
+    color: var(--text-color, #2a3255);
+    text-align: left;
+}
+
+.export-pdf-btn {
+    background-color: #007bff; /* A nice blue color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.export-pdf-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+.tab-content table {
+  width: 100%;
+  border-collapse: collapse; /* Crucial for single borders */
+}
+/* Apply consistent table styling to all tables within tab-content */
+.tab-content .financial-table th,
+.tab-content .financial-table td {
+  padding: 8px 10px; /* Reduced padding for compactness */
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #ccc; /* Vertical line */
+  text-align: center; /* Center align all content */
+  font-size: 13px; /* Reduced font size for compactness */
+  white-space: nowrap; /* Prevent wrapping */
+}
+.tab-content .financial-table th {
+  background: var(--nav-bg);
+  color: var(--button-text);
+  font-weight: 700;
+  text-transform: uppercase; /* Headers uppercase */
+  letter-spacing: 0.5px;
+  padding-top: 10px; /* Adjusted padding for header */
+  padding-bottom: 10px;
+}
+/* Remove border from the last column of all tables within tab-content */
+.tab-content .financial-table th:last-child,
+.tab-content .financial-table td:last-child {
+  border-right: none;
+}
+.tab-content table tbody tr:hover {
+  background-color: #eef2fd;
+}
+
+/* Style for selected table row */
+.selected-row {
+    background-color: #d1e7dd; /* A light green to indicate selection */
+    font-weight: bold; /* Make text slightly bolder */
+    border: 1px solid #28a745; /* A subtle green border */
+}
+
+/* If you want to differentiate selected from hover: */
+.tab-content table tbody tr.selected-row:hover {
+    background-color: #c3e6cb; /* Slightly darker green on hover for selected row */
+}
+
+
+.aging-overdue {
+  color: red;
+  font-weight: 700;
+}
+/* Responsive wrapper for tables */
+.tab-content table {
+  overflow-x: auto;
+  display: block; /* Important for overflow-x to work on tables */
+  white-space: normal; /* Allow text wrapping within the table block */
+}
+/* Re-apply white-space nowrap to td/th for individual cell content */
+.tab-content table td, .tab-content table th {
+  white-space: nowrap;
+}

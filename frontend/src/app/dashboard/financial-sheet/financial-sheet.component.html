@@ -1,0 +1,147 @@
+<div class="financial-sheet-container">
+  <div class="tab-buttons">
+    <button [class.active]="activeTab === 'invoices'" (click)="setActiveTab('invoices')">Invoice Details</button>
+    <button [class.active]="activeTab === 'payments'" (click)="setActiveTab('payments')">Payments and Aging</button>
+    <button [class.active]="activeTab === 'memos'" (click)="setActiveTab('memos')">Credit / Debit Memos</button>
+  </div>
+
+  <div class="error-message" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+  <section *ngIf="activeTab === 'invoices'" class="tab-content">
+    <div class="section-header">
+        <h3>Invoice Details</h3>
+        <button class="export-pdf-btn" (click)="handleExportPdfClick()">Export PDF</button>
+    </div>
+    <table class="financial-table">
+      <thead>
+        <tr>
+          <th>Invoice Number</th>
+          <th>Company Code</th>
+          <th>Fiscal Year</th>
+          <th>Billing Date</th>
+          <th>Posting Date</th>
+          <th>Vendor ID</th>
+          <th>Currency</th>
+          <th>Document Type</th>
+          <th>PO Item</th>
+          <th>Material No</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="invoices.length === 0">
+          <td colspan="13" class="no-data">No invoice data available.</td>
+        </tr>
+        <tr *ngFor="let invoice of invoices"
+            [class.selected-row]="selectedInvoice === invoice"
+            (click)="selectInvoiceRow(invoice)">
+          <td>{{ invoice.invoiceNumber }}</td>
+          <td>{{ invoice.companyCode }}</td>
+          <td>{{ invoice.fiscalYear }}</td>
+          <td>{{ invoice.billingDate | date:'mediumDate' }}</td>
+          <td>{{ invoice.postingDate | date:'mediumDate' }}</td>
+          <td>{{ invoice.vendorId }}</td>
+          <td>{{ invoice.currency }}</td>
+          <td>{{ invoice.documentType }}</td>
+          <td>{{ invoice.poItemNumber }}</td>
+          <td>{{ invoice.materialNumber }}</td>
+          <td>{{ invoice.description }}</td>
+          <td>{{ invoice.quantity }}</td>
+          <td>{{ invoice.amount | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section *ngIf="activeTab === 'payments'" class="tab-content">
+    <h3>Payments and Aging</h3>
+    <table class="financial-table">
+      <thead>
+        <tr>
+          <th>Document Number</th>
+          <th>Vendor ID</th>
+          <th>Billing Date</th>
+          <th>Posting Date</th>
+          <th>Due Date</th>
+          <th>Amount</th>
+          <th>Currency</th>
+          <th>Aging (Days)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="payments.length === 0">
+          <td colspan="9" class="no-data">No payment or aging data available.</td>
+        </tr>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.documentNumber }}</td>
+          <td>{{ payment.vendorId }}</td>
+          <td>{{ payment.billingDate | date:'mediumDate' }}</td>
+          <td>{{ payment.postingDate | date:'mediumDate' }}</td>
+          <td>{{ payment.dueDate | date:'mediumDate' }}</td>
+          <td>{{ payment.amount | number:'1.2-2' }}</td>
+          <td>{{ payment.currency }}</td>
+          <td>{{ payment.aging }}</td>
+          <td>{{ payment.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section *ngIf="activeTab === 'memos'" class="tab-content">
+    <h3>Credit & Debit Memos</h3>
+    <table class="financial-table">
+      <thead>
+        <tr>
+          <th>Memo ID</th>
+          <th>Vendor ID</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Currency</th>
+          <th>Description</th>
+          <th>Posting Date</th>
+          <th>Document Date</th>
+          <th>Fiscal Year</th>
+          <th>Line Number</th>
+          <th>Document Type</th>
+          <th>Quantity</th>
+          <th>Unit of Measure</th>
+          <th>Material Number</th>
+          <th>G/L Account</th>
+          <th>Posting Key</th>
+          <th>User Name</th>
+          <th>Company Code</th>
+          <th>Transaction Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="memos.length === 0">
+          <td colspan="19" class="no-data">No credit/debit memo data available.</td>
+        </tr>
+        <tr *ngFor="let memo of memos">
+          <td>{{ memo.memoId }}</td>
+          <td>{{ memo.vendorId }}</td>
+          <td>{{ memo.type }}</td>
+          <td>{{ memo.amount | number:'1.2-2' }}</td>
+          <td>{{ memo.currency }}</td>
+          <td>{{ memo.description }}</td>
+          <td>{{ memo.postingDate | date:'mediumDate' }}</td>
+          <td>{{ memo.documentDate | date:'mediumDate' }}</td>
+          <td>{{ memo.fiscalYear }}</td>
+          <td>{{ memo.lineNumber }}</td>
+          <td>{{ memo.documentTypeRaw }}</td>
+          <td>{{ memo.quantity }}</td>
+          <td>{{ memo.unitOfMeasure }}</td>
+          <td>{{ memo.materialNumber }}</td>
+          <td>{{ memo.glAccount }}</td>
+          <td>{{ memo.postingKey }}</td>
+          <td>{{ memo.userName }}</td>
+          <td>{{ memo.companyCode }}</td>
+          <td>{{ memo.transactionCode }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

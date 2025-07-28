@@ -1,0 +1,110 @@
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 0;
+}
+
+.profile-card {
+  background: var(--main-content);
+  padding: 40px 30px 32px 30px;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(30, 60, 90, 0.13);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+.profile-card:hover {
+  box-shadow: 0 12px 48px rgba(30, 60, 90, 0.18);
+}
+
+.profile-avatar-holder {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.profile-avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 18px rgba(34, 150, 240, 0.16);
+  border: 4px solid #f3f6fd;
+}
+
+.profile-name {
+  font-size: 2rem;
+  color: var(--accent, #2176ff);
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.profile-id {
+  color:var(--profile-id, #f3f6fd);
+  font-size: 1.11rem;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+
+.profile-info-list {
+  margin-top: 12px;
+  text-align: left;
+}
+
+.profile-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 11px;
+  padding: 8px 0;
+  border-bottom: 1px dashed #e5e7ef;
+}
+
+.profile-info-label {
+  color: var(--profile-id-text, #f3f6fd);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.profile-icon {
+  font-size: 20px;
+  color: #46b8ef;
+}
+
+.profile-info-data {
+  color: var(--text-color, #263238);
+  font-size: 1rem;
+  max-width: 56%;
+  text-align: right;
+  overflow-x: auto;
+}
+
+@media (max-width: 700px) {
+  .profile-card {
+    padding: 28px 10px;
+    max-width: 97vw;
+  }
+}
+
+.error-message {
+  color: #d32f2f;
+  font-weight: 600;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  height: 150px;          
+  font-size: 18px;
+  color: var(--text-color, #555);
+  font-weight: 500;
+}

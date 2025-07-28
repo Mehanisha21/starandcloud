@@ -1,0 +1,35 @@
+.top-nav {
+  height: 60px;
+  background: var(--nav-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  color: white;
+}
+
+.top-nav__appname {
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--text-color-nav);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 1px 3px 12px rgba(40,60,120,0.07);
+  margin-left: 50px;
+}
+
+.top-nav__theme-toggle {
+  background: none;
+  border: none;
+  color: #ffd700;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.top-nav__theme-toggle:hover {
+  color: #fff176;
+}

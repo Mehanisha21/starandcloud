@@ -1,0 +1,69 @@
+:root {
+  /* Light mode colors */
+  --background: #f4f8fb;
+  --main-content: #fff;
+  --sidebar: #263238;
+  --text-color-nav: white;
+  --text-color: #263238;
+  --nav-bg: #263238;
+  --accent: #2176ff;
+  --button-bg: #228ef4;
+  --button-text: #fff;
+  --main-bg-gradient: linear-gradient(120deg, #f5f7fa  50%, #c7c9cc  100%);
+  --profile-id: #7183ad;
+  --profile-id-text: teal;
+   --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #2176ff;
+  --scrollbar-thumb-hover: #1566c0;
+}
+
+/* Dark mode overrides */
+body.dark-theme {
+  --background: #15192b;
+  --main-content: #23263d;
+  --sidebar: #0f1021;
+  --text-color-nav: white;
+  --text-color: #fcfcfe;
+  --nav-bg: #0f1021;
+  --accent: #46d3e8;
+  --button-bg: #222c51;
+  --button-text: #ffe082;
+  --profile-id: #d6d7db;
+  --profile-id-text: #ffe082;
+ --main-bg-gradient: linear-gradient(120deg, #343146 60%, #23202f 100%);
+
+}
+
+/* Base styles using variables */
+body, html {
+  background-color: var(--background) !important;
+  color: var(--text-color) !important;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 8px;
+  border: 3px solid var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+

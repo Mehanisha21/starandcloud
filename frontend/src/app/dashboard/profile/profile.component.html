@@ -1,0 +1,60 @@
+<div *ngIf="vendorProfile; else loadingOrError" class="profile-page-container">
+  <div class="profile-card">
+    <div class="profile-avatar-holder">
+      <img src="assets/vendor_profile.jpg" alt="Profile Picture" class="profile-avatar" />
+    </div>
+    <h2 class="profile-name">{{ vendorProfile.Name1 }}</h2>
+    <div class="profile-id">Vendor ID: {{ vendorProfile.VendorId }}</div>
+    
+    <div class="profile-info-list">
+      <div class="profile-info-row">
+        <span class="profile-info-label">
+          <span class="material-icons profile-icon">location_city</span> City
+        </span>
+        <span class="profile-info-data">{{ vendorProfile.Ort01 }}</span>
+      </div>
+      <div class="profile-info-row">
+        <span class="profile-info-label">
+          <span class="material-icons profile-icon">map</span> Country
+        </span>
+        <span class="profile-info-data">{{ vendorProfile.Land1 }}</span>
+      </div>
+      <div class="profile-info-row">
+        <span class="profile-info-label">
+          <span class="material-icons profile-icon">home</span> Address
+        </span>
+        <span class="profile-info-data">{{ vendorProfile.Stras }}</span>
+      </div>
+      <div class="profile-info-row">
+        <span class="profile-info-label">
+          <span class="material-icons profile-icon">place</span> Postal Code
+        </span>
+        <span class="profile-info-data">{{ vendorProfile.Pstlz }}</span>
+      </div>
+      <div class="profile-info-row">
+        <span class="profile-info-label">
+          <span class="material-icons profile-icon">domain</span> Region
+        </span>
+        <span class="profile-info-data">{{ vendorProfile.Regio }}</span>
+      </div>
+      <div class="profile-info-row">
+        <span class="profile-info-label">
+          <span class="material-icons profile-icon">assignment_ind</span> Address Number
+        </span>
+        <span class="profile-info-data">{{ vendorProfile.Adrnr }}
+</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingOrError>
+  <div *ngIf="errorMessage; else loading" class="error-message">
+    {{ errorMessage }}
+  </div>
+  <ng-template #loading>
+    <div class="loading-container">
+        <p>Loading vendor profile...</p>
+    </div>
+  </ng-template>
+</ng-template>

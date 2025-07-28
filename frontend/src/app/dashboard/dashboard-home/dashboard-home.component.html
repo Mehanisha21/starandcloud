@@ -1,0 +1,61 @@
+<div class="dash-home-container">
+  <h2 class="welcome-message">Welcome, {{ userName }}</h2>
+  <div class="summary-cards">
+    <div class="summary-card" *ngFor="let card of summaryCards" [ngStyle]="{'background': card.color}">
+      <span class="material-icons summary-icon">{{ card.icon }}</span>
+      <div class="summary-value">{{ card.value }}</div>
+      <div class="summary-label">{{ card.label }}</div>
+    </div>
+  </div>
+
+   <!-- Data visualizations -->
+  <!-- <div class="dashboard-charts">
+    <section class="chart-section">
+      <h3>Monthly RFQs Trend</h3>
+      <ngx-charts-bar-vertical
+        [results]="monthlyRFQs"
+        [xAxis]="true"
+        [yAxis]="true"
+        [gradient]="false"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Month"
+        yAxisLabel="RFQs"
+        [scheme]="colorSchemePO">
+      </ngx-charts-bar-vertical>
+    </section>
+
+    <section class="chart-section">
+      <h3>PO Status</h3>
+      <ngx-charts-pie-chart
+        [results]="poStatusData"
+        [legend]="true"
+        [explodeSlices]="false"
+        [labels]="true"
+        [doughnut]="true"
+        [scheme]="colorSchemePO">
+      </ngx-charts-pie-chart>
+    </section>
+
+    <section class="chart-section">
+      <h3>Delivery Rate</h3>
+      <ngx-charts-pie-chart
+        [results]="deliveryRateData"
+        [legend]="true"
+        [labels]="true"
+        [doughnut]="true"
+        [scheme]="colorSchemeDelivery">
+      </ngx-charts-pie-chart>
+    </section>
+
+    <section class="chart-section">
+       <h3>Invoice Status</h3>
+      <ngx-charts-pie-chart
+        [results]="invoiceStatusData"
+        [legend]="true"
+        [labels]="true"
+        [doughnut]="true"
+        [scheme]="colorSchemeInvoice">
+      </ngx-charts-pie-chart>
+    </section> -->
+</div>

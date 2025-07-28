@@ -1,0 +1,11 @@
+<div class="layout-root">
+  <app-top-nav class="top-nav" [class.open]="sidebarOpen"></app-top-nav>
+
+  <app-sidebar [userName]="vendorName" [sidebarOpen]="sidebarOpen" (sidebarChanged)="onSidebarToggle($event)" 
+               [class.open]="sidebarOpen" class="sidebar-contrasty">
+  </app-sidebar>
+
+  <main class="main-pane"  [class.open]="sidebarOpen">
+    <router-outlet></router-outlet>
+  </main>
+</div>

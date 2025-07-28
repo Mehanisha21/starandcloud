@@ -1,0 +1,42 @@
+.po-container {
+  margin: 20px; /* This applies 20px margin to all sides initially */
+  margin-left: 80px; /* Increased left margin for more space before "Purchase Orders" */
+  font-family: Arial, sans-serif;
+}
+
+.po-container h2 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.po-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.po-table th,
+.po-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.po-table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.no-data-msg {
+  text-align: center;
+  margin-top: 50px;
+  color: #777;
+}
+
+.error-msg {
+  color: red;
+  font-weight: bold;
+}

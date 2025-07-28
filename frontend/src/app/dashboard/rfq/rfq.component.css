@@ -1,0 +1,74 @@
+.rfq-page-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: var(--main-content);
+  padding: 32px 28px 18px 28px;
+  border-radius: 10px;
+  box-shadow: 0 2px 14px 0 rgba(25,60,90,0.08);
+}
+
+.rfq-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: var(--accent);
+}
+
+.rfq-table-responsive {
+  overflow-x: auto;
+}
+
+.rfq-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  margin-bottom: 8px;
+}
+
+.rfq-table th, .rfq-table td {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.rfq-table th {
+  background: #eef4f9;
+  color: #206497;
+  font-weight: 600;
+  border-bottom: 2px solid #ccd5e0;
+}
+
+.rfq-table tbody tr {
+  border-bottom: 1px solid #ececec;
+  background: #f8fbff;
+  transition: background 0.14s;
+}
+
+.rfq-table tbody tr:hover {
+  background: #e9f1fc;
+}
+
+.open-status { color: #43a047; font-weight: 600; }
+.submitted-status { color: #2196f3; font-weight: 600; }
+.awarded-status { color: #fbbc05; font-weight: 600; }
+.closed-status { color: #d32f2f; font-weight: 600; }
+
+.rfq-action-btn {
+  padding: 6px 17px;
+  border: none;
+  border-radius: 7px;
+  background: var(--button-bg, #228ef4);
+  color: var(--button-text, #fff);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.17s;
+}
+.rfq-action-btn:disabled {
+  background: #cfd8dd;
+  color: #888;
+  cursor: not-allowed;
+}
+.rfq-action-btn:not(:disabled):hover {
+  background: #1566c0;
+}
