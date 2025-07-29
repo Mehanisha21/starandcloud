@@ -13,21 +13,31 @@
     <div class="table-responsive">
       <table class="table rfq-table">
         <thead>
-          <tr>
-            <th>RFQ ID</th>
-            <th>Item</th>
-            <th>Quantity (Unit)</th> <th>Due Date</th>
-            <th>measure</th>
-          </tr>
+         <tr>
+          <th>RFQ No</th>
+          <th>Line Item</th>
+          <th>Material No</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Unit</th>
+          <th>Net Price</th>
+          <th>Currency</th>
+          <th>Gross Amount</th>
+          <th>Document Date</th>
+        </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let rfq of rfqs; trackBy: trackByRfqId">
-            <td>{{ rfq.id }}</td>
-            <td>{{ rfq.item }}</td>
-            <td>{{ rfq.qtyUnit }}</td> <td>{{ rfq.due }}</td>
-            <td>
-              <button class="btn btn-primary" (click)="submitQuote(rfq.id)">Submit Quote</button>
-            </td>
+          <tr *ngFor="let rfq of rfqs">
+            <td>{{ rfq.Lifnr }}</td>
+            <td>{{ rfq.Ebelp }}</td>
+            <td>{{ rfq.Matnr }}</td>
+            <td>{{ rfq.Txz01 }}</td>
+            <td>{{ rfq.Ktmng }}</td>
+            <td>{{ rfq.Meins }}</td>
+            <td>{{ rfq.Netpr }}</td>
+            <td>{{ rfq.Waers }}</td>
+            <td>{{ rfq.Brtwr }}</td>
+            <td>{{ rfq.Bedat | date:'yyyy-MM-dd' }}</td>
           </tr>
         </tbody>
       </table>
@@ -39,64 +49,3 @@
   </div>
 
 </div>
-
-<style>
-  .rfq-container {
-    margin: 20px;
-    margin-left: 80px; /* Adjust as needed */
-    font-family: Arial, sans-serif;
-  }
-  .rfq-container h2 {
-    margin-bottom: 15px;
-    color: #2c3e50;
-  }
-  .table-responsive {
-    overflow-x: auto;
-  }
-  .rfq-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .rfq-table th,
-  .rfq-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  .rfq-table th {
-    background-color: #f4f4f4;
-    color: #333;
-  }
-  .no-data-msg {
-    text-align: center;
-    margin-top: 50px;
-    color: #777;
-  }
-  .alert {
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-  }
-  .alert-warning {
-    background-color: #fff3cd;
-    border-color: #ffeeba;
-    color: #856404;
-  }
-  .alert-info {
-    background-color: #d1ecf1;
-    border-color: #bee5eb;
-    color: #0c5460;
-  }
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-  }
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-</style>

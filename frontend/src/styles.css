@@ -15,6 +15,22 @@
    --scrollbar-track: #f1f1f1;
   --scrollbar-thumb: #2176ff;
   --scrollbar-thumb-hover: #1566c0;
+  --primary: #3498db;
+  --header-bg: #3498db;
+  --header-text: #fff;
+  --odd-row-bg: #deeafab0;
+  --even-row-bg: #fff;
+  --hover-row-bg: #dddee0;
+  --table-text: #2c3e50;
+  --button-bg-hover: #297fb958;
+  --button-shadow: 0 4px 8px rgb(52 152 219 / 0.25);
+  --button-shadow-hover: 0 6px 12px rgb(41 128 185 / 0.35);
+  --alert-info-bg: #d0e6f9;
+  --alert-info-text: #31708f;
+  --alert-warning-bg: #fff3cd;
+  --alert-warning-text: #8a6d3b;
+  --container-bg: #d7f6fd;
+  --box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
 }
 
 /* Dark mode overrides */
@@ -31,6 +47,22 @@ body.dark-theme {
   --profile-id: #d6d7db;
   --profile-id-text: #ffe082;
  --main-bg-gradient: linear-gradient(120deg, #343146 60%, #23202f 100%);
+  --primary: #2381b9;
+  --header-bg: #959595;
+  --header-text: #fafbfc;
+  --odd-row-bg: #253041;
+  --even-row-bg: #1c2432;
+  --hover-row-bg: #2f4560;
+  --table-text: #eef3f7;
+  --button-bg-hover: #14597c;
+  --button-shadow: 0 4px 8px rgb(35 129 185 / 0.25);
+  --button-shadow-hover: 0 6px 12px rgb(20 89 124 / 0.32);
+  --alert-info-bg: #25445a;
+  --alert-info-text: #84cbff;
+  --alert-warning-bg: #4c3f1b;
+  --alert-warning-text: #ffeb99;
+  --container-bg: #192029;
+  --box-shadow: 0 4px 20px rgb(30 41 59 / 0.38);
 
 }
 
