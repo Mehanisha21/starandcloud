@@ -1,42 +1,227 @@
+/* Container */
 .po-container {
-  margin: 20px; /* This applies 20px margin to all sides initially */
-  margin-left: 80px; /* Increased left margin for more space before "Purchase Orders" */
-  font-family: Arial, sans-serif;
-}
-
-.po-container h2 {
-  margin-bottom: 15px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #2c3e50;
+  background-color: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Wrapper for title and filters with bottom border */
+.po-header-filters-wrapper {
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 12px;
+  margin-bottom: 25px;
+}
+
+/* Title */
+.po-filters h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--header-bg);
+  margin-right: 150px;
+}
+
+/* Filters container */
+.po-filters {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Individual label */
+.po-filters label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--header-bg);
+  display: flex;
+  flex-direction: column;
+  
+}
+
+/* Common filter input styles */
+.filter-input {
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 1.5px solid #ccc;
+  min-width: 130px;
+  transition: border-color 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Search input inside filters */
+.po-filters .search-bar input[type="text"] {
+  width: 250px;
+  max-width: 100%;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  margin-top: 15px; 
+}
+
+/* Focus styles for inputs */
+.po-filters .search-bar input[type="text"]:focus,
+.filter-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .po-filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .filter-input,
+  .po-filters .search-bar input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    margin-top: 8px; /* Add some spacing between vertically stacked inputs */
+  }
+}
+
+
+/* Table wrapper for horizontal scroll */
 .table-responsive {
   overflow-x: auto;
 }
 
 .po-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--table-bg, #fff);
 }
 
-.po-table th,
-.po-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
+/* Table header */
+.po-table thead tr {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  text-align: left;
 }
 
-.po-table th {
-  background-color: #f4f4f4;
-  color: #333;
+.po-table thead th {
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  user-select: none;
+ 
 }
 
+/* Table body rows */
+.po-table tbody tr {
+  transition: background-color 0.3s ease;
+  cursor: default;
+  
+}
+
+.po-table tbody tr:nth-child(odd) {
+  background-color: var(--odd-row-bg, #f9fafb);
+}
+
+.po-table tbody tr:nth-child(even) {
+  background-color: var(--even-row-bg, #ffffff);
+}
+
+/* Hover state on rows */
+.po-table tbody tr:hover {
+  background-color: var(--hover-row-bg, #e6f2ff);
+}
+
+/* Table cells */
+.po-table tbody td {
+  padding: 12px 18px;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: var(--table-text);
+  border-bottom: 1px solid #e1e8f0;
+}
+
+/* Remove border from last row cells */
+.po-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* No Data Message */
 .no-data-msg {
   text-align: center;
   margin-top: 50px;
   color: #777;
+  font-size: 1rem;
+  user-select: none;
 }
 
-.error-msg {
-  color: red;
-  font-weight: bold;
+/* Alert message styles */
+.alert {
+  font-size: 1rem;
+  padding: 12px 16px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+  user-select: none;
+}
+
+.alert-warning {
+  background-color: var(--alert-warning-bg, #fff3cd);
+  color: var(--alert-warning-text, #856404);
+  border: 1px solid var(--alert-warning-bg, #ffeeba);
+}
+
+.alert-info.no-data-msg {
+  background-color: var(--alert-info-bg, #d1ecf1);
+  color: var(--alert-info-text, #0c5460);
+  border: 1px solid var(--alert-info-bg, #bee5eb);
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .po-container {
+    padding: 15px 15px;
+  }
+
+  .po-table thead {
+    display: none; /* hide headers on small screens */
+  }
+
+  .po-table tbody td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #e1e8f0;
+  }
+
+  .po-table tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+    text-align: left;
+    color: #34495e;
+  }
+
+  .po-table tbody tr:last-child td {
+    border-bottom: none;
+  }
 }

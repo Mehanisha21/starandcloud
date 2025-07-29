@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { DashboardModule } from './dashboard/dashboard.module'; // Lazy loaded
 import { CommonModule } from '@angular/common';
 
 
@@ -26,7 +25,6 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     NgxChartsModule,
     CommonModule,
-    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
