@@ -1,5 +1,36 @@
 <div class="rfq-container">
-  <h2>Requests for Quotation (RFQ)</h2>
+ <div class="rfq-header-filters-wrapper">
+    
+    <div class="rfq-filters">
+      <h2>Requests for Quotation (RFQ)</h2>
+      <!-- Date range filter -->
+      <label>
+        From:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateFrom"
+          (change)="applyFilters()"
+          class="form-control filter-input"
+        />
+      </label>
+      <label>
+        To:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateTo"
+          (change)="applyFilters()"
+          class="form-control filter-input"
+        />
+      </label>
+     <div class="search-bar">
+         <input
+        type="text"
+        placeholder="Search RFQs..."
+        [(ngModel)]="filters.searchTerm"
+        (input)="applyFilters()"/>
+     </div>
+    </div>
+  </div>
 
   <div *ngIf="isLoading" class="loading-message">
     Loading RFQs...
