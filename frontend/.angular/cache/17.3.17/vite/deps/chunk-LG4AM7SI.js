@@ -1,6 +1,10 @@
 import {
   DOCUMENT
+<<<<<<<< HEAD:frontend/.angular/cache/17.3.17/vite/deps/chunk-Y2DVVXIQ.js
+} from "./chunk-4XQYUA5H.js";
+========
 } from "./chunk-6BWPBNVK.js";
+>>>>>>>> 84d0bebfb36e334bf43d06dea021a6755d10c3e6:frontend/.angular/cache/17.3.17/vite/deps/chunk-LG4AM7SI.js
 import {
   ANIMATION_MODULE_TYPE,
   Inject,
@@ -12,7 +16,11 @@ import {
   setClassMetadata,
   ɵɵdefineInjectable,
   ɵɵinject
+<<<<<<<< HEAD:frontend/.angular/cache/17.3.17/vite/deps/chunk-Y2DVVXIQ.js
+} from "./chunk-2LWNIC4S.js";
+========
 } from "./chunk-OISPPTTF.js";
+>>>>>>>> 84d0bebfb36e334bf43d06dea021a6755d10c3e6:frontend/.angular/cache/17.3.17/vite/deps/chunk-LG4AM7SI.js
 
 // node_modules/@angular/animations/fesm2022/animations.mjs
 var AnimationMetadataType;
@@ -476,4 +484,8 @@ export {
    * License: MIT
    *)
 */
+<<<<<<<< HEAD:frontend/.angular/cache/17.3.17/vite/deps/chunk-Y2DVVXIQ.js
+//# sourceMappingURL=chunk-Y2DVVXIQ.js.map
+========
 //# sourceMappingURL=chunk-LG4AM7SI.js.map
+>>>>>>>> 84d0bebfb36e334bf43d06dea021a6755d10c3e6:frontend/.angular/cache/17.3.17/vite/deps/chunk-LG4AM7SI.js
