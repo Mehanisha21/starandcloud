@@ -1,24 +1,95 @@
-/* Container styling */
+/* Container */
 .rfq-container {
   max-width: 1100px;
-  margin: 20px auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--table-text);
-  background-color: var(--container-bg);
+  margin: 0 auto;
   padding: 20px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  background-color: var(--container-bg);
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Heading */
-.rfq-container h2 {
-  font-weight: 600;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: var(--header-bg);
+/* Wrapper for title and filters with bottom border */
+.rfq-header-filters-wrapper {
   border-bottom: 2px solid #3498db;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
+  margin-bottom: 25px;
 }
+
+/* Title */
+.rfq-filters h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--header-bg);
+  margin-right: 30px;
+}
+
+/* Filters container */
+.rfq-filters {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Individual label */
+.rfq-filters label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--header-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Common filter input styles */
+.filter-input {
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 1.5px solid #ccc;
+  min-width: 130px;
+  transition: border-color 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Search input inside filters */
+.rfq-filters .search-bar input[type="text"] {
+  width: 250px;
+  max-width: 100%;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  margin-top: 15px; 
+}
+
+/* Focus styles for inputs */
+.rfq-filters .search-bar input[type="text"]:focus,
+.filter-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .rfq-filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .filter-input,
+  .rfq-filters .search-bar input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    margin-top: 8px; /* Add some spacing between vertically stacked inputs */
+  }
+}
+
 
 /* Loading and alerts styling */
 .loading-message,
@@ -108,31 +179,7 @@
   border-bottom: none;
 }
 
-/* Button styling */
-.btn {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.25s ease, box-shadow 0.25s ease;
-  display: inline-block;
-  user-select: none;
-}
 
-.btn-primary {
-  background-color: #3498db;
-  color: #fff;
-  box-shadow: 0 4px 8px rgb(52 152 219 / 0.25);
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: #2980b9;
-  box-shadow: 0 6px 12px rgb(41 128 185 / 0.35);
-  outline: none;
-}
 
 /* Responsive tweaks */
 @media (max-width: 600px) {
@@ -167,9 +214,4 @@
     color: #34495e;
   }
 
-  .btn-primary {
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 8px;
-  }
 }

@@ -1,67 +1,213 @@
 .goods-receipt-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px;
-  background: var(--main-content, #fff);
-  border-radius: 10px;
-  box-shadow: 0 2px 14px rgba(25,60,90,0.1);
+  padding: 20px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  background-color: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.goods-receipt-table {
-  width: 100%;
-  border-collapse: collapse; /* This is crucial for single borders between cells */
-  background: transparent;
-  margin-bottom: 8px;
+.goods-receipt-header-filters-wrapper {
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 12px;
+  margin-bottom: 25px;
 }
 
-.goods-receipt-table th,
-.goods-receipt-table td {
-  padding: 12px 18px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  border-right: 1px solid #ccc; /* Added vertical line */
-  font-size: 14px;
-  white-space: nowrap;
-}
 
-/* Remove border from the last column to avoid an extra line on the right edge */
-.goods-receipt-table th:last-child,
-.goods-receipt-table td:last-child {
-  border-right: none;
-}
-
-.goods-receipt-table th {
-  background: var(--nav-bg, #225);
-  color: var(--button-text, #fff);
+/* Title */
+.goods-receipt-filters h2 {
+  font-size: 2rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  color: var(--header-bg);
+  margin-right: 335px;
 }
 
-.goods-receipt-table tbody tr:hover {
-  background-color: #eef2fd;
+/* Filters container */
+.goods-receipt-filters {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-/* Optional: Specific styling for date columns if still cramped */
-/* Assuming 'Posting Date' and 'Document Date' are the 3rd and 4th columns */
-.goods-receipt-table th:nth-child(3),
-.goods-receipt-table td:nth-child(3),
-.goods-receipt-table th:nth-child(4),
-.goods-receipt-table td:nth-child(4) {
-  min-width: 110px;
+/* Individual label */
+.goods-receipt-filters label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--header-bg);
+  display: flex;
+  flex-direction: column;
+  
 }
 
-.no-data-msg {
-  text-align: center;
-  margin: 48px 0;
-  color: var(--text-color, #2a3255);
-  font-size: 18px;
-  font-weight: 500;
+/* Common filter input styles */
+.filter-input {
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 1.5px solid #ccc;
+  min-width: 130px;
+  transition: border-color 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Search input inside filters */
+.goods-receipt-filters .search-bar input[type="text"] {
+  width: 250px;
+  max-width: 100%;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  margin-top: 15px; 
+}
+
+/* Focus styles for inputs */
+.goods-receipt-filters .search-bar input[type="text"]:focus,
+.filter-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .goods-receipt-filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .filter-input,
+  .goods-receipt-filters .search-bar input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    margin-top: 8px; /* Add some spacing between vertically stacked inputs */
+  }
 }
 
 .goods-receipt-table-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.goods-receipt-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--table-bg, #fff);
+}
+
+.goods-receipt-table thead tr {
+  background-color: var(--header-bg, #3498db);
+  color: var(--header-text, #fff);
+  text-align: left;
+}
+
+.goods-receipt-table th {
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+  text-align: left;
+}
+
+.goods-receipt-table td {
+  padding: 12px 18px;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: var(--table-text, #2c3e50);
+  border-bottom: 1px solid #e1e8f0;
+  text-align: left;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.goods-receipt-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.goods-receipt-table tbody tr:nth-child(odd) {
+  background-color: var(--odd-row-bg, #f9fafb);
+}
+.goods-receipt-table tbody tr:nth-child(even) {
+  background-color: var(--even-row-bg, #fff);
+}
+.goods-receipt-table tbody tr:hover {
+  background-color: var(--hover-row-bg, #e6f2ff);
+}
+
+/* Responsive for mobile devices */
+@media (max-width: 600px) {
+  .goods-receipt-container {
+    padding: 15px 10px;
+  }
+  .goods-receipt-table thead {
+    display: none;
+  }
+  .goods-receipt-table tbody td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #e1e8f0;
+  }
+  .goods-receipt-table tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+    text-align: left;
+    color: #34495e;
+  }
+  .goods-receipt-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+/* Alerts and no-data */
+.loading-message {
+  font-size: 1rem;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 5px;
+  color: #268;
+  margin: 20px 0;
+}
+.alert {
+  font-size: 1rem;
+  padding: 12px 16px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 500;
+  user-select: none;
+}
+.alert-warning {
+  background-color: var(--alert-warning-bg, #fff3cd);
+  color: var(--alert-warning-text, #856404);
+  border: 1px solid var(--alert-warning-bg, #ffeeba);
+}
+.no-data-message {
+  text-align: center;
+  margin-top: 48px;
+  color: var(--text-color, #2a3255);
+  font-size: 1.1rem;
+  font-weight: 500;
+  user-select: none;
 }

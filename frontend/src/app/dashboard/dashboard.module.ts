@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CommonModule } from '@angular/common'; // Correct import for CommonModule
 import { RouterModule, Routes } from '@angular/router';
-
+import { FormsModule} from '@angular/forms'; // Import if needed
 // Import all components that belong to this dashboard module
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
@@ -35,8 +35,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    // Declare all components, directives, and pipes that belong to this dashboard module
-    // CommonModule MUST NOT be here. It belongs only in 'imports'.
     RFQComponent,
     POComponent,
     SidebarComponent,
@@ -45,13 +43,14 @@ const routes: Routes = [
     DashboardHomeComponent,
     FinancialSheetComponent,
     ProfileComponent,
-    GoodsReceiptComponent // Ensure GoodsReceiptComponent is declared here
+    GoodsReceiptComponent, // Ensure GoodsReceiptComponent is declared here
   ],
   imports: [
-    CommonModule, // <--- Correct place for CommonModule
+    CommonModule, 
     RouterModule.forChild(routes),
     NgxChartsModule,
-    // FormsModule, ReactiveFormsModule, etc. if needed
+    FormsModule
+    
   ]
 })
 export class DashboardModule { }

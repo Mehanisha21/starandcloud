@@ -1,51 +1,82 @@
 <div class="goods-receipt-container">
-  <h2>Goods Receipts</h2>
+  <div class="goods-receipt-header-filters-wrapper">
+    <div class="goods-receipt-filters">
+      <h2>Goods Receipts</h2>
+      <label>
+        From:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateFrom"
+          (change)="applyFilters()"
+          class="form-control filter-input"
+        />
+      </label>
+      <label>
+        To:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateTo"
+          (change)="applyFilters()"
+          class="form-control filter-input"
+        />
+      </label>
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="filters.searchTerm"
+          (input)="applyFilters()"
+        />
+      </div>
+    </div>
+  </div>
 
-  <div *ngIf="isLoading" class="loading-spinner">
+  <div *ngIf="isLoading" class="loading-message">
     Loading goods receipts...
   </div>
 
-  <div *ngIf="errorMsg" class="error-message">
+  <div *ngIf="!isLoading && errorMsg" class="alert alert-warning">
     {{ errorMsg }}
-    <button (click)="fetchGoodsReceipts()">Retry</button>
   </div>
 
-  <div *ngIf="!isLoading && goodsReceipts.length > 0" class="goods-receipt-table-wrapper">
-    <table class="goods-receipt-table">
-      <thead>
-        <tr>
-          <th>Document No</th>
-          <th>Vendor ID</th>
-          <th>Posting Date</th>
-          <th>Document Date</th>
-          <th>Document Type</th>
-          <th>Purchase Order No</th>
-          <th>PO Item</th>
-          <th>Material No</th>
-          <th>Description</th>
-          <th>Movement Type</th>
-          <th>Unit of Measure</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let receipt of goodsReceipts">
-          <td>{{ receipt.documentNo }}</td>
-          <td>{{ receipt.vendorId }}</td>
-          <td>{{ receipt.postingDate | date:'mediumDate' }}</td>
-          <td>{{ receipt.documentDate | date:'mediumDate' }}</td>
-          <td>{{ receipt.documentType }}</td>
-          <td>{{ receipt.purchaseOrderNo }}</td>
-          <td>{{ receipt.purchaseOrderItem }}</td>
-          <td>{{ receipt.materialNo }}</td>
-          <td>{{ receipt.description }}</td>
-          <td>{{ receipt.movementType }}</td>
-          <td>{{ receipt.unitOfMeasure }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <ng-container *ngIf="!isLoading && !errorMsg && filteredGoodsReceipts.length > 0">
+    <div class="goods-receipt-table-wrapper">
+      <table class="goods-receipt-table">
+        <thead>
+          <tr>
+            <th>Document No</th>
+            <th>Vendor ID</th>
+            <th>Posting Date</th>
+            <th>Document Date</th>
+            <th>Document Type</th>
+            <th>Purchase Order No</th>
+            <th>PO Item</th>
+            <th>Material No</th>
+            <th>Description</th>
+            <th>Movement Type</th>
+            <th>Unit of Measure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let receipt of filteredGoodsReceipts">
+            <td data-label="Document No">{{ receipt.documentNo }}</td>
+            <td data-label="Vendor ID">{{ receipt.vendorId }}</td>
+            <td data-label="Posting Date">{{ receipt.postingDate | date:'mediumDate' }}</td>
+            <td data-label="Document Date">{{ receipt.documentDate | date:'mediumDate' }}</td>
+            <td data-label="Document Type">{{ receipt.documentType }}</td>
+            <td data-label="Purchase Order No">{{ receipt.purchaseOrderNo }}</td>
+            <td data-label="PO Item">{{ receipt.purchaseOrderItem }}</td>
+            <td data-label="Material No">{{ receipt.materialNo }}</td>
+            <td data-label="Description">{{ receipt.description }}</td>
+            <td data-label="Movement Type">{{ receipt.movementType }}</td>
+            <td data-label="Unit of Measure">{{ receipt.unitOfMeasure }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
 
-  <div *ngIf="!isLoading && goodsReceipts.length === 0 && !errorMsg" class="no-data-message">
+  <div *ngIf="!isLoading && !errorMsg && filteredGoodsReceipts.length === 0" class="no-data-message">
     No goods receipts to display.
   </div>
 </div>

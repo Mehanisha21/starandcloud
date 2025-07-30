@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService, VendorProfile } from '../../services/profile.service';
 import { AuthService } from '../../services/auth.service';   // import your auth service
 
+
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
   vendorProfile: VendorProfile | null = null;
   errorMessage = '';
@@ -40,3 +43,4 @@ export class ProfileComponent implements OnInit {
     });
   }
 }
+

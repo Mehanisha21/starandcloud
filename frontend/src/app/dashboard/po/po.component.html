@@ -1,5 +1,35 @@
 <div class="po-container">
-  <h2>Purchase Orders</h2>
+  <div class="po-header-filters-wrapper">
+    <div class="po-filters">
+       <h2>Purchase Orders (PO)</h2>
+      <!-- Date range filter -->
+      <label>
+        From:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateFrom"
+          (change)="applyFilters()"
+          class="form-control filter-input"
+        />
+      </label>
+      <label>
+        To:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateTo"
+          (change)="applyFilters()"
+          class="form-control filter-input"
+        />
+      </label>
+     <div class="search-bar">
+         <input
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="filters.searchTerm"
+        (input)="applyFilters()"/>
+     </div>
+    </div>
+  </div>
 
   <div *ngIf="isLoading" class="loading-message">
     Loading Purchase Orders...
@@ -37,60 +67,4 @@
   <div *ngIf="!isLoading && noDataFound && !errorMsg" class="alert alert-info no-data-msg">
     No Purchase Order data available for this vendor in SAP.
   </div>
-
 </div>
-
-<style>
-  /* Styles for alert messages */
-  .alert {
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-  }
-  .alert-warning {
-    background-color: #fff3cd;
-    border-color: #ffeeba;
-    color: #856404;
-  }
-  .alert-info {
-    background-color: #d1ecf1;
-    border-color: #bee5eb;
-    color: #0c5460;
-  }
-  /* Your existing CSS from po.component.css should also be present */
-  .po-container {
-    margin: 20px;
-    margin-left: 80px;
-    font-family: Arial, sans-serif;
-  }
-  .po-container h2 {
-    margin-bottom: 15px;
-    color: #2c3e50;
-  }
-  .table-responsive {
-    overflow-x: auto;
-  }
-  .po-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .po-table th,
-  .po-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  .po-table th {
-    background-color: #f4f4f4;
-    color: #333;
-  }
-  .no-data-msg {
-    text-align: center;
-    margin-top: 50px;
-    color: #777;
-  }
-  .error-msg { /* Note: This class is not directly used in the new HTML, 'alert alert-warning' is. */
-    color: red;
-    font-weight: bold;
-  }
-</style>

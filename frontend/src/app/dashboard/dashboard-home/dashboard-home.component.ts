@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService, VendorProfile } from '../../services/profile.service';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
-import { RfqService } from '../../services/rfq.service'; 
+import { RfqService } from '../../services/rfq.service';
+import { PoService } from '../../services/po.service'; // Assuming you have a PoService for Purchase Orders 
 
 @Component({
   selector: 'app-dashboard-home',
@@ -15,7 +16,7 @@ export class DashboardHomeComponent implements OnInit {
 
   summaryCards = [
     {label: 'Open RFQs',value: 0,icon: 'description',color: 'linear-gradient(120deg,#2d81f7 60%, #72e7fd 100%)'},
-    { label: 'Active POs', value: 5, icon: 'assignment', color: 'linear-gradient(120deg,#43a047 70%, #b8f2cc 100%)' },
+    { label: 'Active POs', value: 0, icon: 'assignment', color: 'linear-gradient(120deg,#43a047 70%, #b8f2cc 100%)' },
     { label: 'Goods Receipts', value: 12, icon: 'local_shipping', color: 'linear-gradient(120deg,#fb8c00 70%, #ffe082 100%)' },
     { label: 'Outstanding Invoices', value: 3, icon: 'receipt', color: 'linear-gradient(120deg,#d32f2f 70%, #ffbdbd 100%)' }
   ];
@@ -24,7 +25,8 @@ export class DashboardHomeComponent implements OnInit {
 
   constructor(private authService: AuthService, 
               private profileService: ProfileService,
-              private rfqService: RfqService) {}
+              private rfqService: RfqService,
+            ) {}
 
   ngOnInit(): void {
     const vendorId = this.authService.getVendorId();
@@ -86,12 +88,12 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   
-
   poStatusData = [
-    { name: 'Completed', value: 8 },
-    { name: 'In Progress', value: 3 },
+    { name: 'Completed', value: 5 },
+    { name: 'In Progress', value: 2 },
     { name: 'Cancelled', value: 1 }
   ];
+  
 
   deliveryLineTrend = [
   {
