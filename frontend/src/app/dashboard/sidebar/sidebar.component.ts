@@ -26,21 +26,22 @@ export class SidebarComponent {
 
   constructor(private router: Router) { } // Inject Router
 
-  ngOnInit(): void {
-    // Initialization logic if needed
-  }
-
   toggleSidebar(): void {
     this.sidebarOpen = !this.sidebarOpen;
     this.sidebarChanged.emit(this.sidebarOpen); // Emit the new boolean state
   }
 
-  handleLogoutClick(event: Event, link: any): void {
-    if (link.label === 'Logout') {
-      event.preventDefault(); // Prevent default routerLink navigation
-      // Implement your logout logic here
-      console.log('Logout initiated');
-      this.router.navigate(['/login']); // Redirect to login page after logout
-    }
+  handleLogoutClick(event: MouseEvent, link: { label: string; icon: string; route: string }) {
+  if (link.label === 'Logout') {
+    event.preventDefault();
+    event.stopPropagation();  // add this too
+
+    const confirmed = confirm('Are you sure you want to logout?');
+    if (confirmed) {
+      // Clear auth tokens or perform logout logic here
+      this.router.navigate([link.route]);
+    } 
   }
+}
+
 }
