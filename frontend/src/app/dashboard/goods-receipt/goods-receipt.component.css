@@ -9,6 +9,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+
 .goods-receipt-header-filters-wrapper {
   border-bottom: 2px solid #3498db;
   padding-bottom: 12px;
@@ -16,13 +17,7 @@
 }
 
 
-/* Title */
-.goods-receipt-filters h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--header-bg);
-  margin-right: 335px;
-}
+
 
 /* Filters container */
 .goods-receipt-filters {
@@ -31,6 +26,14 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
+}
+
+/* Title */
+.goods-receipt-filters h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--header-bg);
+  margin-right: 300 px;
 }
 
 /* Individual label */

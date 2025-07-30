@@ -45,24 +45,18 @@ export class LoginComponent implements OnInit {
           if (response.success) {
             console.log('Login successful:', response.message);
 
-            // We no longer need loggedInVendorId from response.data directly for routing
-            // as profile.component.ts will get it from AuthService.getVendorId()
-
-            // --- Step 2: Immediately fetch vendor data using the VendorService ---
-            // This call is still important to populate data in the profile service or cache,
-            // even if the routing doesn't directly depend on its success for navigation.
             this.vendorService.getVendorData(vendorId).subscribe({ // Use vendorId from form
               next: (vendorDataResponse: any) => {
                 console.log('Vendor data fetched successfully:', vendorDataResponse);
                 // FIX: Navigate to the correct dashboard profile route
-                this.router.navigate(['/dashboard/profile']); // <-- CHANGED THIS LINE
+                this.router.navigate(['/dashboard']); // <-- CHANGED THIS LINE
               },
               error: (error: HttpErrorResponse) => {
                 this.loading = false;
                 console.error('Error fetching vendor data after login:', error);
                 this.apiError = 'Login successful, but failed to load vendor data. Please try again later.';
-                // FIX: Still navigate to dashboard/profile even on error to show the page
-                this.router.navigate(['/dashboard/profile']); // <-- CHANGED THIS LINE
+           
+                this.router.navigate(['/dashboard']); // <-- CHANGED THIS LINE
               }
             });
 
