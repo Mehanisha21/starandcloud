@@ -4,6 +4,7 @@ import { ProfileService, VendorProfile } from '../../services/profile.service';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { RfqService } from '../../services/rfq.service';
 import { PoService } from '../../services/po.service'; // Assuming you have a PoService for Purchase Orders 
+import { GoodsReceiptService } from '../../services/goods-receipt.service'; 
 
 @Component({
   selector: 'app-dashboard-home',
@@ -17,15 +18,17 @@ export class DashboardHomeComponent implements OnInit {
   summaryCards = [
     {label: 'Open RFQs',value: 0,icon: 'description',color: 'linear-gradient(120deg,#2d81f7 60%, #72e7fd 100%)'},
     { label: 'Active POs', value: 0, icon: 'assignment', color: 'linear-gradient(120deg,#43a047 70%, #b8f2cc 100%)' },
-    { label: 'Goods Receipts', value: 12, icon: 'local_shipping', color: 'linear-gradient(120deg,#fb8c00 70%, #ffe082 100%)' },
-    { label: 'Outstanding Invoices', value: 3, icon: 'receipt', color: 'linear-gradient(120deg,#d32f2f 70%, #ffbdbd 100%)' }
+    { label: 'Goods Receipts', value: 0, icon: 'local_shipping', color: 'linear-gradient(120deg,#fb8c00 70%, #ffe082 100%)' },
+    { label: 'Outstanding Invoices', value: 0, icon: 'receipt', color: 'linear-gradient(120deg,#d32f2f 70%, #ffbdbd 100%)' }
   ];
 
   monthlyRFQs: { name: string, value: number }[] = [];
+  deliveryLineTrend: any[] = [];
 
   constructor(private authService: AuthService, 
               private profileService: ProfileService,
               private rfqService: RfqService,
+              private goodsReceiptService: GoodsReceiptService,
             ) {}
 
   ngOnInit(): void {
@@ -35,8 +38,23 @@ export class DashboardHomeComponent implements OnInit {
       return;
     }
 
+    if (vendorId) {
+      this.profileService.getVendorProfile(vendorId).subscribe({
+        next: (res) => {
+          if (res.success && res.data.Name1) {
+            this.vendorProfile = res.data;
+            this.userName = this.vendorProfile.Name1;
+          }
+        },
+        error: (err) => {
+          console.error('Error loading vendor profile:', err);
+          this.userName = 'Vendor';
+        }
+      });
+    }
 
-  this.rfqService.getRfqsByVendor(vendorId).subscribe({
+
+    this.rfqService.getRfqsByVendor(vendorId).subscribe({
       next: (res) => {
         if (res.success && Array.isArray(res.data)) {
           this.processRfqsForDashboard(res.data);
@@ -46,6 +64,10 @@ export class DashboardHomeComponent implements OnInit {
         console.error('Error loading RFQs:', err);
       }
     });
+
+    if (vendorId) {
+      this.loadGoodsReceipts(vendorId);
+    }
   }
 
   private processRfqsForDashboard(rfqs: any[]) {
@@ -95,30 +117,57 @@ export class DashboardHomeComponent implements OnInit {
   ];
   
 
-  deliveryLineTrend = [
-  {
-    name: 'On Time',
-    series: [
-      { name: 'Jan', value: 26 },
-      { name: 'Feb', value: 27 },
-      { name: 'Mar', value: 29 },
-      { name: 'Apr', value: 31 },
-      { name: 'May', value: 28 }
-      // add more months/data as needed
-    ]
-  },
-  {
-    name: 'Late',
-    series: [
-      { name: 'Jan', value: 4 },
-      { name: 'Feb', value: 6 },
-      { name: 'Mar', value: 3 },
-      { name: 'Apr', value: 2 },
-      { name: 'May', value: 5 }
-    ]
-  }
-];
 
+
+  loadGoodsReceipts(vendorId: string): void {
+    this.goodsReceiptService.getGoodsReceipts(vendorId).subscribe({
+      next: (receipts) => {
+        this.summaryCards[2].value = receipts.length;
+        this.deliveryLineTrend = this.buildDeliveryTrendData(receipts);
+      },
+      error: (error) => {
+        console.error('Error loading Goods Receipts:', error);
+      }
+    });
+  }
+
+  private buildDeliveryTrendData(goodsReceipts: any[]): any[] {
+    const map: Record<string, Record<string, number>> = {};
+
+    for (const gr of goodsReceipts) {
+      const actualDate = new Date(gr.postingDate);
+      const month = actualDate.toISOString().slice(0, 7); // YYYY-MM
+
+      let status = 'On Time';
+
+      // Adjust the field name for scheduled date if needed, example: scheduledDate or plannedDate
+      if (gr.scheduledDate) {
+        const scheduledDate = new Date(gr.scheduledDate);
+        status = actualDate <= scheduledDate ? 'On Time' : 'Late';
+      } else {
+        status = 'Unknown';
+      }
+
+      if (!map[status]) {
+        map[status] = {};
+      }
+      if (!map[status][month]) {
+        map[status][month] = 0;
+      }
+      map[status][month]++;
+    }
+
+    // Format for ngx-charts
+    return Object.entries(map).map(([status, months]) => ({
+      name: status,
+      series: Object.entries(months)
+        .sort(([m1], [m2]) => m1.localeCompare(m2))
+        .map(([month, count]) => ({
+          name: month,
+          value: count
+        }))
+    }));
+  }
 
   invoiceStatusData = [
     { name: 'Paid', value: 18 },
