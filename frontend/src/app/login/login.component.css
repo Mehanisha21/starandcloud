@@ -1,195 +1,253 @@
+/* General Reset and Font */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden; /* Prevent scrolling */
+}
 
+/* Hide password reveal buttons for various browsers */
 input[type="password"]::-ms-reveal,
 input[type="password"]::-webkit-reveal,
 input[type="password"]::-webkit-input-decoration-container,
 input[type="password"]::-webkit-credentials-auto-fill-button {
-  display: none !important;
-  pointer-events: none;
-  visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    visibility: hidden;
 }
 
+/* Login Wrapper - Full screen background */
 .login-wrapper {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  min-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  background: url('/assets/login_back.png') center center / cover no-repeat;
-  top: 0;
-  left: 0;
- 
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Maintaining your original background image path */
+    background: url('/assets/login_back.png') center center / cover no-repeat;
+    top: 0;
+    left: 0;
 }
 
-
-
-.login-card {
-  z-index: 2;
-  min-width: 350px;
-  background: rgba(255,255,255,0.13);
-  border-radius: 20px;
-  box-shadow: 0 12px 40px 0 rgba(30,40,90,0.26);
-  border: 1.5px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  padding: 44px 38px 38px 38px;
-  color: #f8f9fa;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 100px;
-}
-
+/* Overlay for subtle background dimming */
 .login-wrapper .overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 19, 33, 0.111);
-  z-index: 1;
-  top: 0;
-  left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 19, 33, 0.25); /* Slightly darker overlay for more glass effect */
+    z-index: 1;
+    top: 0;
+    left: 0;
 }
 
+/* Login Card - The main glassy element */
+.login-card {
+    z-index: 2;
+    min-width: 350px; /* Made smaller from 380px */
+    background: rgba(255, 255, 255, 0.08); /* More transparent */
+    border-radius: 20px;
+    box-shadow: 0 12px 40px 0 rgba(30, 40, 90, 0.35); /* Stronger shadow for depth */
+    border: 1.5px solid rgba(255, 255, 255, 0.25); /* Slightly more visible border */
+    backdrop-filter: blur(25px); /* Increased blur for stronger glass effect */
+    -webkit-backdrop-filter: blur(25px);
+    padding: 44px 38px 38px 38px; /* Slightly reduced padding */
+    color: #f8f9fa;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 90px; /* Moved slightly to the right (reduced from 120px) */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 50px 0 rgba(30, 40, 90, 0.45);
+}
+
+/* Login Card Header */
 .login-card h2 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 32px;
-  margin-bottom: 12px;
-  letter-spacing: 1.2px;
-  font-weight: 700; /* Bold */
-  background: linear-gradient(90deg, #01214f, #0104a9);
-  background-clip: text;              
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-transform: uppercase; /* Optional: all caps */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 34px; /* Slightly smaller font size */
+    margin-bottom: 15px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #01214f, #0104a9);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
 }
-
 
 .login-card .subtitle {
-  color: #040809;
-  margin-bottom: 28px;
-  font-size: 16px;
+    color: #d1d1d1; /* Lighter subtitle color for better contrast on glass */
+    margin-bottom: 28px; /* Slightly reduced margin */
+    font-size: 16px; /* Slightly smaller font size */
 }
 
+/* Form Styling */
 form {
-  width: 100%;
+    width: 100%;
 }
 
 .form-group {
-  width: 100%;
-  text-align: left;
-  margin-bottom: 24px;
-  position: relative;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 24px; /* Slightly reduced margin */
+    position: relative;
 }
 
 .form-group label {
-  display: block;
-  font-size: 14px;
-  color: #46494c;
-  margin-bottom: 7px;
-  font-weight: 500;
+    display: block;
+    font-size: 14px; /* Slightly smaller label */
+    color: #e0e0e0; /* Lighter label color */
+    margin-bottom: 7px; /* Slightly reduced margin */
+    font-weight: 500;
 }
 
 .form-group .icon {
-  margin-right: 1px;
-  font-size: 13px;
-  
+    margin-right: 1px;
+    font-size: 13px; /* Slightly smaller icon */
 }
 
 .form-group input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 13px 15px 13px 15px;
-  border: 1.5px solid rgba(255,255,255,0.2);
-  border-radius: 10px;
-  background: rgba(255,255,255,0.12);
-  color: white;
-  font-size: 15px;
-  outline: none;
-  transition: border 0.2s, box-shadow 0.2s;
-  position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px 13px 15px; /* Slightly reduced padding */
+    border: 1.5px solid rgba(255, 255, 255, 0.3); /* More visible border */
+    border-radius: 10px; /* Slightly less rounded corners */
+    background: rgba(255, 255, 255, 0.08); /* More transparent background */
+    color: white;
+    font-size: 15px; /* Slightly smaller font size */
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+    position: relative;
 }
 
 .form-group input.invalid {
-  border-color: #f86a6a;
-  background: rgba(248,106,106,0.10);
+    border-color: #ff9999; /* Lighter error border */
+    background: rgba(255, 153, 153, 0.15); /* Lighter error background */
 }
 
 .form-group input::placeholder {
-  color: #ffffff;
-  font-size: 15px;
+    color: #ffffff;
+    font-size: 15px;
 }
 
 .form-group input:focus {
-  background: rgba(255,255,255,0.24);
-  border: 1.5px solid #39c2ff;
-  box-shadow: 0 0 8px #4cbaff67;
+    background: rgba(255, 255, 255, 0.15); /* Slightly more visible on focus */
+    border: 1.5px solid #66d9ff; /* Brighter focus border */
+    box-shadow: 0 0 10px #66d9ff67; /* Enhanced shadow on focus */
 }
 
 .password-input-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  height: 28px;
-  width: 28px;
-  z-index: 2;
+    position: absolute;
+    top: 50%;
+    right: 12px; /* Adjusted right position */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: 28px; /* Slightly smaller touch target */
+    width: 28px;
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.7); /* Lighter icon color */
+    transition: color 0.2s;
+}
+
+.toggle-password:hover {
+    color: white;
 }
 
 .toggle-password svg {
-  display: block;
+    display: block;
 }
 
 .error {
-  font-size: 12px;
-  color: #ff7a7a;
-  margin-top: 3px;
-  margin-left: 4px;
+    font-size: 12px; /* Slightly smaller error text */
+    color: #ffaaaa; /* Lighter error color */
+    margin-top: 3px;
+    margin-left: 4px;
 }
 
+/* Submit Button */
 button[type='submit'] {
-  width: 70%;
-  padding: 14px;
-  background: linear-gradient(to right, #0072ff, #00c6ff);
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  font-size: 17px;
-  font-weight: 600;
-  margin-top: 5px;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  box-shadow: 0 3px 12px 0 rgba(14, 64, 172, 0.17);
-  transition: background 0.3s, transform 0.08s, opacity 0.2s;
+    width: 70%; /* Slightly smaller width */
+    padding: 14px; /* Slightly reduced padding */
+    background: linear-gradient(to right, #007bff, #00c6ff); /* Adjusted gradient */
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 17px; /* Slightly smaller font size */
+    font-weight: 600;
+    margin-top: 5px; /* Slightly reduced margin */
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    box-shadow: 0 5px 15px 0 rgba(0, 115, 255, 0.25); /* Stronger shadow */
+    transition: background 0.3s, transform 0.15s, opacity 0.2s, box-shadow 0.3s;
 }
 
 button[type='submit']:hover:enabled {
-  background: linear-gradient(to right, #0052d4, #4364f7);
-  transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(to right, #0056b3, #0099e6); /* Darker hover gradient */
+    transform: translateY(-2px) scale(1.02); /* Less pronounced hover effect */
+    box-shadow: 0 8px 20px 0 rgba(0, 115, 255, 0.35);
 }
 
 button[type='submit']:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+    opacity: 0.5; /* More faded when disabled */
+    cursor: not-allowed;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .login-wrapper {
+        justify-content: center; /* Center card on smaller screens */
+    }
+    .login-card {
+        margin-right: 0; /* Remove margin-right */
+        min-width: 280px; /* Adjusted for smaller screens */
+        width: 90vw; /* Adjust width for mobile */
+        max-width: 380px; /* Max width for consistency */
+        padding: 30px 20px 25px 20px; /* Adjusted padding */
+    }
+    .login-card h2 {
+        font-size: 28px;
+    }
+    .login-card .subtitle {
+        font-size: 14px;
+    }
+    .form-group input {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+    button[type='submit'] {
+        width: 80%;
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 480px) {
-  .login-card {
-    padding: 28px 10px 24px 10px;
-    min-width: unset;
-    width: 96vw;
-  }
+    .login-card {
+        padding: 24px 15px 20px 15px;
+        width: 95vw;
+        min-width: unset;
+    }
+    .login-card h2 {
+        font-size: 26px;
+    }
+    .login-card .subtitle {
+        font-size: 13px;
+    }
+    button[type='submit'] {
+        width: 85%;
+    }
 }
