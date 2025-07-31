@@ -1,5 +1,5 @@
 .goods-receipt-container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 20px 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -21,7 +21,7 @@
   font-size: 2rem;
   font-weight: 600;
   color: var(--header-bg);
-  margin-right: 335px;
+  margin-right: 200px;
 }
 
 /* Filters container */
