@@ -4,7 +4,8 @@ import { ProfileService, VendorProfile } from '../../services/profile.service';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { RfqService } from '../../services/rfq.service';
 import { PoService } from '../../services/po.service'; // Assuming you have a PoService for Purchase Orders 
-import { GoodsReceiptService } from '../../services/goods-receipt.service'; 
+import { GoodsReceiptService, GoodsReceipt } from '../../services/goods-receipt.service';
+
 
 @Component({
   selector: 'app-dashboard-home',
@@ -123,7 +124,8 @@ export class DashboardHomeComponent implements OnInit {
     this.goodsReceiptService.getGoodsReceipts(vendorId).subscribe({
       next: (receipts) => {
         this.summaryCards[2].value = receipts.length;
-        this.deliveryLineTrend = this.buildDeliveryTrendData(receipts);
+        this.deliveryLineTrend = this.buildGoodsReceiptMonthlyTrendData(receipts);
+
       },
       error: (error) => {
         console.error('Error loading Goods Receipts:', error);
@@ -131,43 +133,35 @@ export class DashboardHomeComponent implements OnInit {
     });
   }
 
-  private buildDeliveryTrendData(goodsReceipts: any[]): any[] {
-    const map: Record<string, Record<string, number>> = {};
+  private buildGoodsReceiptMonthlyTrendData(goodsReceipts: GoodsReceipt[]): any[] {
+  const monthMap: Record<string, number> = {};
 
-    for (const gr of goodsReceipts) {
-      const actualDate = new Date(gr.postingDate);
-      const month = actualDate.toISOString().slice(0, 7); // YYYY-MM
+  goodsReceipts.forEach(gr => {
+    const postingDate = new Date(gr.postingDate);
+    const year = postingDate.getFullYear();
+    const month = postingDate.getMonth(); // 0-based
+    const label = `${postingDate.toLocaleString('default', { month: 'short' })} '${year.toString().slice(-2)}`; // e.g., "Jul '25"
+    monthMap[label] = (monthMap[label] || 0) + 1;
+  });
 
-      let status = 'On Time';
+  const sortedSeries = Object.entries(monthMap)
+    .sort(([a], [b]) => {
+      const parse = (label: string) => {
+        const [mon, yr] = label.split(" '");
+        const monthNum = new Date(`${mon} 1, 20${yr}`).getMonth();
+        return parseInt(`20${yr}`) * 100 + monthNum;
+      };
+      return parse(a) - parse(b);
+    })
+    .map(([label, value]) => ({ name: label, value }));
 
-      // Adjust the field name for scheduled date if needed, example: scheduledDate or plannedDate
-      if (gr.scheduledDate) {
-        const scheduledDate = new Date(gr.scheduledDate);
-        status = actualDate <= scheduledDate ? 'On Time' : 'Late';
-      } else {
-        status = 'Unknown';
-      }
+  return [{
+    name: 'Goods Receipts',
+    series: sortedSeries
+  }];
+}
 
-      if (!map[status]) {
-        map[status] = {};
-      }
-      if (!map[status][month]) {
-        map[status][month] = 0;
-      }
-      map[status][month]++;
-    }
 
-    // Format for ngx-charts
-    return Object.entries(map).map(([status, months]) => ({
-      name: status,
-      series: Object.entries(months)
-        .sort(([m1], [m2]) => m1.localeCompare(m2))
-        .map(([month, count]) => ({
-          name: month,
-          value: count
-        }))
-    }));
-  }
 
   invoiceStatusData = [
     { name: 'Paid', value: 18 },
