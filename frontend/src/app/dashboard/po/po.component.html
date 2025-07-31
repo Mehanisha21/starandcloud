@@ -43,7 +43,7 @@
     <div class="table-responsive">
       <table class="table po-table">
         <thead>
-          <tr>
+          <tr >
             <th>PO Number</th>
             <th>Vendor ID</th>
             <th>Order Type</th>
@@ -52,7 +52,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let po of purchaseOrders">
+          <tr *ngFor="let po of filteredPurchaseOrders">
             <td>{{ po.Ebeln }}</td>
             <td>{{ po.Lifnr }}</td>
             <td>{{ po.Bstyp }}</td>
