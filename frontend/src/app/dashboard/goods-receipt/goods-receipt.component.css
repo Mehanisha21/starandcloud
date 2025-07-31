@@ -1,9 +1,5 @@
 .goods-receipt-container {
-<<<<<<< HEAD
   max-width: 1100px;
-=======
-  max-width: 1000px;
->>>>>>> a30bb0c3a3c1a289cc24d72c364490ed533f3621
   margin: 0 auto;
   padding: 20px 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,25 +16,22 @@
   margin-bottom: 25px;
 }
 
-<<<<<<< HEAD
 
 /* Title */
 .goods-receipt-filters h2 {
   font-size: 2rem;
   font-weight: 600;
   color: var(--header-bg);
-  margin-right: 200px;
+  text-align: left;
 }
 
-=======
->>>>>>> a30bb0c3a3c1a289cc24d72c364490ed533f3621
 /* Filters container */
 .goods-receipt-filters {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 /* Title */

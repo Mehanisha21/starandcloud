@@ -51,7 +51,6 @@
           [scheme]="colorSchemeDelivery"
           [xAxis]="true"
           [yAxis]="true"
-          [legend]="true"
           [autoScale]="true"
           [showXAxisLabel]="true"
           [showYAxisLabel]="true"
@@ -61,7 +60,6 @@
           [timeline]="true"
           [showGridLines]="true">
         </ngx-charts-line-chart>
-
       </div>  
     </section>
 
@@ -69,7 +67,7 @@
        <h3>Invoice Status</h3>
        <div class="chart-wrapper">
         <ngx-charts-pie-chart
-        [results]="invoiceStatusData"
+        [results]="dynamicInvoiceStatusData"
         [explodeSlices]="false"
         [labels]="true"
         [doughnut]="true"
@@ -79,4 +77,39 @@
       </ngx-charts-pie-chart>
        </div>
     </section>
+
+    <section class="chart-section">
+      <h3>Payment Aging</h3>
+      <div class="chart-wrapper">
+        <ngx-charts-bar-vertical
+          [results]="paymentAgingStatusData"
+          [xAxis]="true"
+          [yAxis]="true"
+          [gradient]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          xAxisLabel="Aging Range"
+          yAxisLabel="Count"
+          [scheme]="colorSchemePO"
+          [animations]="true">
+        </ngx-charts-bar-vertical>
+      </div>
+    </section>
+
+    <section class="chart-section">
+      <h3>Credit / Debit Memos</h3>
+      <div class="chart-wrapper">
+        <ngx-charts-pie-chart
+          [results]="memoTypeData"
+          [explodeSlices]="false"
+          [labels]="true"
+          [doughnut]="true"
+          [scheme]="colorSchemePO"
+          [arcWidth]="0.3"
+          [animations]="true">
+        </ngx-charts-pie-chart>
+      </div>
+    </section>
+
+
 </div>

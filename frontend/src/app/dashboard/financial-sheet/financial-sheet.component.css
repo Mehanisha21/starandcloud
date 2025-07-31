@@ -1,11 +1,14 @@
 .financial-sheet-container {
-  max-width: 1100px; /* Adjusted max-width for better horizontal space utilization */
-  margin: auto;
-  padding: 24px;
-  background: var(--main-content);
-  border-radius: 10px;
-  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
+  background-color: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+
 .tab-buttons {
   display: flex;
   gap: 16px;
@@ -25,97 +28,216 @@
   color: white;
 }
 
-/* New styles for the header and PDF button */
 .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px; /* Adjust spacing as needed */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 12px;
 }
-
 .section-header h3 {
-    margin-top: 0;
-    margin-bottom: 0; /* Remove default bottom margin to align with button */
-    font-size: 22px;
-    color: var(--text-color, #2a3255);
-    text-align: left;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--header-bg);
+  text-align: left;
 }
-
 .export-pdf-btn {
-    background-color: #007bff; /* A nice blue color */
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 500;
-    transition: background-color 0.3s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: var(--accent);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 10px;
 }
-
 .export-pdf-btn:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background-color: #0056b3;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-
-.tab-content table {
-  width: 100%;
-  border-collapse: collapse; /* Crucial for single borders */
-}
-/* Apply consistent table styling to all tables within tab-content */
-.tab-content .financial-table th,
-.tab-content .financial-table td {
-  padding: 8px 10px; /* Reduced padding for compactness */
-  border-bottom: 1px solid #eee;
-  border-right: 1px solid #ccc; /* Vertical line */
-  text-align: center; /* Center align all content */
-  font-size: 13px; /* Reduced font size for compactness */
-  white-space: nowrap; /* Prevent wrapping */
-}
-.tab-content .financial-table th {
-  background: var(--nav-bg);
-  color: var(--button-text);
-  font-weight: 700;
-  text-transform: uppercase; /* Headers uppercase */
-  letter-spacing: 0.5px;
-  padding-top: 10px; /* Adjusted padding for header */
-  padding-bottom: 10px;
-}
-/* Remove border from the last column of all tables within tab-content */
-.tab-content .financial-table th:last-child,
-.tab-content .financial-table td:last-child {
-  border-right: none;
-}
-.tab-content table tbody tr:hover {
-  background-color: #eef2fd;
+/* Individual label */
+.section-header label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--header-bg);
+  display: flex;
+  flex-direction: column;
+  
 }
 
-/* Style for selected table row */
-.selected-row {
-    background-color: #d1e7dd; /* A light green to indicate selection */
-    font-weight: bold; /* Make text slightly bolder */
-    border: 1px solid #28a745; /* A subtle green border */
+/* Common filter input styles */
+.filter-input {
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 1.5px solid #ccc;
+  min-width: 130px;
+  transition: border-color 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
 }
 
-/* If you want to differentiate selected from hover: */
-.tab-content table tbody tr.selected-row:hover {
-    background-color: #c3e6cb; /* Slightly darker green on hover for selected row */
+/* Search input inside filters */
+.section-header .search-bar input[type="text"] {
+  width: 250px;
+  max-width: 100%;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 15px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  margin-top: 15px; 
 }
 
-
-.aging-overdue {
-  color: red;
-  font-weight: 700;
+/* Focus styles for inputs */
+.section-header .search-bar input[type="text"]:focus,
+.filter-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
 }
-/* Responsive wrapper for tables */
-.tab-content table {
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .filter-input,
+  .section-header .search-bar input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    margin-top: 8px; /* Add some spacing between vertically stacked inputs */
+  }
+}
+
+.financial-sheet-table-wrapper {
   overflow-x: auto;
-  display: block; /* Important for overflow-x to work on tables */
-  white-space: normal; /* Allow text wrapping within the table block */
+  -webkit-overflow-scrolling: touch;
 }
-/* Re-apply white-space nowrap to td/th for individual cell content */
-.tab-content table td, .tab-content table th {
+
+.financial-sheet-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--table-bg, #fff);
+}
+
+.financial-sheet-table thead tr {
+  background-color: var(--header-bg, #3498db);
+  color: var(--header-text, #fff);
+  text-align: left;
+}
+
+.financial-sheet-table th {
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+  text-align: left;
+}
+
+.financial-sheet-table td {
+  padding: 12px 18px;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  color: var(--table-text, #2c3e50);
+  border-bottom: 1px solid #e1e8f0;
+  text-align: left;
+  box-sizing: border-box;
   white-space: nowrap;
+}
+
+.financial-sheet-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.financial-sheet-table tbody tr:nth-child(odd) {
+  background-color: var(--odd-row-bg, #f9fafb);
+}
+.financial-sheet-table tbody tr:nth-child(even) {
+  background-color: var(--even-row-bg, #fff);
+}
+
+.financial-sheet-table tbody tr:hover {
+  background-color: var(--hover-row-bg, #e6f2ff);
+}
+
+.selected-row {
+  background-color: #d1e7dd;
+  font-weight: bold;
+  border: 1px solid #28a745;
+}
+.selected-row:hover {
+  background-color: #c3e6cb;
+}
+
+.error-message,
+.loading-message,
+.alert,
+.alert-warning,
+.no-data-message {
+  text-align: center;
+  font-weight: 500;
+  user-select: none;
+}
+
+.error-message {
+  color: var(--alert-warning-text, #856404);
+  background-color: var(--alert-warning-bg, #fff3cd);
+  border: 1px solid var(--alert-warning-bg, #ffeeba);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.no-data {
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-color, #2a3255);
+}
+
+/* Responsive table for mobile */
+@media (max-width: 600px) {
+  .financial-sheet-container {
+    padding: 15px 10px;
+  }
+  .financial-sheet-table thead {
+    display: none;
+  }
+  .financial-sheet-table tbody td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border-bottom: 1px solid #e1e8f0;
+  }
+  .financial-sheet-table tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+    text-align: left;
+    color: #34495e;
+  }
+  .financial-sheet-table tbody tr:last-child td {
+    border-bottom: none;
+  }
 }

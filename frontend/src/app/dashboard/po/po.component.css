@@ -22,11 +22,7 @@
   font-size: 2rem;
   font-weight: 600;
   color: var(--header-bg);
-<<<<<<< HEAD
-  margin-right: 100px;
-=======
-  margin-right: 50px;
->>>>>>> a30bb0c3a3c1a289cc24d72c364490ed533f3621
+  text-align: left;
 }
 
 /* Filters container */
@@ -35,7 +31,7 @@
   gap: 15px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 /* Individual label */

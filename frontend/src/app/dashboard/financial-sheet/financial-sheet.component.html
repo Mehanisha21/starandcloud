@@ -7,141 +7,232 @@
 
   <div class="error-message" *ngIf="errorMsg">{{ errorMsg }}</div>
 
+  <!-- Invoice Details Tab -->
   <section *ngIf="activeTab === 'invoices'" class="tab-content">
     <div class="section-header">
-        <h3>Invoice Details</h3>
-        <button class="export-pdf-btn" (click)="handleExportPdfClick()">Export PDF</button>
+      <h3>Invoice Details</h3>
+      <label>
+        From:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateFrom"
+          (change)="applyFilters(activeTab)"
+          class="form-control filter-input"
+        />
+      </label>
+      <label>
+        To:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateTo"
+          (change)="applyFilters(activeTab)"
+          class="form-control filter-input"
+        />
+      </label>
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="filters.searchTerm"
+          (input)="applyFilters(activeTab)"
+        />
+      </div>
+      <button class="export-pdf-btn" (click)="handleExportPdfClick()">Export PDF</button>
     </div>
-    <table class="financial-table">
-      <thead>
-        <tr>
-          <th>Invoice Number</th>
-          <th>Company Code</th>
-          <th>Fiscal Year</th>
-          <th>Billing Date</th>
-          <th>Posting Date</th>
-          <th>Vendor ID</th>
-          <th>Currency</th>
-          <th>Document Type</th>
-          <th>PO Item</th>
-          <th>Material No</th>
-          <th>Description</th>
-          <th>Quantity</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngIf="invoices.length === 0">
-          <td colspan="13" class="no-data">No invoice data available.</td>
-        </tr>
-        <tr *ngFor="let invoice of invoices"
-            [class.selected-row]="selectedInvoice === invoice"
-            (click)="selectInvoiceRow(invoice)">
-          <td>{{ invoice.invoiceNumber }}</td>
-          <td>{{ invoice.companyCode }}</td>
-          <td>{{ invoice.fiscalYear }}</td>
-          <td>{{ invoice.billingDate | date:'mediumDate' }}</td>
-          <td>{{ invoice.postingDate | date:'mediumDate' }}</td>
-          <td>{{ invoice.vendorId }}</td>
-          <td>{{ invoice.currency }}</td>
-          <td>{{ invoice.documentType }}</td>
-          <td>{{ invoice.poItemNumber }}</td>
-          <td>{{ invoice.materialNumber }}</td>
-          <td>{{ invoice.description }}</td>
-          <td>{{ invoice.quantity }}</td>
-          <td>{{ invoice.amount | number:'1.2-2' }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="financial-sheet-table-wrapper">
+      <table class="financial-sheet-table">
+        <thead>
+          <tr>
+            <th>Invoice Number</th>
+            <th>Company Code</th>
+            <th>Fiscal Year</th>
+            <th>Billing Date</th>
+            <th>Posting Date</th>
+            <th>Vendor ID</th>
+            <th>Currency</th>
+            <th>Document Type</th>
+            <th>PO Item</th>
+            <th>Material No</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="invoices.length === 0">
+            <td colspan="13" class="no-data">No invoice data available.</td>
+          </tr>
+          <tr *ngFor="let invoice of filteredInvoices"
+              [class.selected-row]="selectedInvoice === invoice"
+              (click)="selectInvoiceRow(invoice)">
+            <td data-label="Invoice Number">{{ invoice.invoiceNumber }}</td>
+            <td data-label="Company Code">{{ invoice.companyCode }}</td>
+            <td data-label="Fiscal Year">{{ invoice.fiscalYear }}</td>
+            <td data-label="Billing Date">{{ invoice.billingDate | date:'mediumDate' }}</td>
+            <td data-label="Posting Date">{{ invoice.postingDate | date:'mediumDate' }}</td>
+            <td data-label="Vendor ID">{{ invoice.vendorId }}</td>
+            <td data-label="Currency">{{ invoice.currency }}</td>
+            <td data-label="Document Type">{{ invoice.documentType }}</td>
+            <td data-label="PO Item">{{ invoice.poItemNumber }}</td>
+            <td data-label="Material No">{{ invoice.materialNumber }}</td>
+            <td data-label="Description">{{ invoice.description }}</td>
+            <td data-label="Quantity">{{ invoice.quantity }}</td>
+            <td data-label="Amount">{{ invoice.amount | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
+  <!-- Payments and Aging Tab -->
   <section *ngIf="activeTab === 'payments'" class="tab-content">
-    <h3>Payments and Aging</h3>
-    <table class="financial-table">
-      <thead>
-        <tr>
-          <th>Document Number</th>
-          <th>Vendor ID</th>
-          <th>Billing Date</th>
-          <th>Posting Date</th>
-          <th>Due Date</th>
-          <th>Amount</th>
-          <th>Currency</th>
-          <th>Aging (Days)</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngIf="payments.length === 0">
-          <td colspan="9" class="no-data">No payment or aging data available.</td>
-        </tr>
-        <tr *ngFor="let payment of payments">
-          <td>{{ payment.documentNumber }}</td>
-          <td>{{ payment.vendorId }}</td>
-          <td>{{ payment.billingDate | date:'mediumDate' }}</td>
-          <td>{{ payment.postingDate | date:'mediumDate' }}</td>
-          <td>{{ payment.dueDate | date:'mediumDate' }}</td>
-          <td>{{ payment.amount | number:'1.2-2' }}</td>
-          <td>{{ payment.currency }}</td>
-          <td>{{ payment.aging }}</td>
-          <td>{{ payment.status }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="section-header">
+      <h3>Payments and Aging</h3>
+            <label>
+        From:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateFrom"
+          (change)="applyFilters(activeTab)"
+          class="form-control filter-input"
+        />
+      </label>
+      <label>
+        To:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateTo"
+          (change)="applyFilters(activeTab)"
+          class="form-control filter-input"
+        />
+      </label>
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="filters.searchTerm"
+          (input)="applyFilters(activeTab)"
+        />
+      </div>
+    </div>
+    <div class="financial-sheet-table-wrapper">
+      <table class="financial-sheet-table">
+        <thead>
+          <tr>
+            <th>Document Number</th>
+            <th>Vendor ID</th>
+            <th>Billing Date</th>
+            <th>Posting Date</th>
+            <th>Due Date</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Aging (Days)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="payments.length === 0">
+            <td colspan="9" class="no-data">No payment or aging data available.</td>
+          </tr>
+          <tr *ngFor="let payment of payments">
+            <td data-label="Document Number">{{ payment.documentNumber }}</td>
+            <td data-label="Vendor ID">{{ payment.vendorId }}</td>
+            <td data-label="Billing Date">{{ payment.billingDate | date:'mediumDate' }}</td>
+            <td data-label="Posting Date">{{ payment.postingDate | date:'mediumDate' }}</td>
+            <td data-label="Due Date">{{ payment.dueDate | date:'mediumDate' }}</td>
+            <td data-label="Amount">{{ payment.amount | number:'1.2-2' }}</td>
+            <td data-label="Currency">{{ payment.currency }}</td>
+            <td data-label="Aging (Days)">{{ payment.aging }}</td>
+            <td data-label="Status">{{ payment.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
+  <!-- Credit & Debit Memos Tab -->
   <section *ngIf="activeTab === 'memos'" class="tab-content">
-    <h3>Credit & Debit Memos</h3>
-    <table class="financial-table">
-      <thead>
-        <tr>
-          <th>Memo ID</th>
-          <th>Vendor ID</th>
-          <th>Type</th>
-          <th>Amount</th>
-          <th>Currency</th>
-          <th>Description</th>
-          <th>Posting Date</th>
-          <th>Document Date</th>
-          <th>Fiscal Year</th>
-          <th>Line Number</th>
-          <th>Document Type</th>
-          <th>Quantity</th>
-          <th>Unit of Measure</th>
-          <th>Material Number</th>
-          <th>G/L Account</th>
-          <th>Posting Key</th>
-          <th>User Name</th>
-          <th>Company Code</th>
-          <th>Transaction Code</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngIf="memos.length === 0">
-          <td colspan="19" class="no-data">No credit/debit memo data available.</td>
-        </tr>
-        <tr *ngFor="let memo of memos">
-          <td>{{ memo.memoId }}</td>
-          <td>{{ memo.vendorId }}</td>
-          <td>{{ memo.type }}</td>
-          <td>{{ memo.amount | number:'1.2-2' }}</td>
-          <td>{{ memo.currency }}</td>
-          <td>{{ memo.description }}</td>
-          <td>{{ memo.postingDate | date:'mediumDate' }}</td>
-          <td>{{ memo.documentDate | date:'mediumDate' }}</td>
-          <td>{{ memo.fiscalYear }}</td>
-          <td>{{ memo.lineNumber }}</td>
-          <td>{{ memo.documentTypeRaw }}</td>
-          <td>{{ memo.quantity }}</td>
-          <td>{{ memo.unitOfMeasure }}</td>
-          <td>{{ memo.materialNumber }}</td>
-          <td>{{ memo.glAccount }}</td>
-          <td>{{ memo.postingKey }}</td>
-          <td>{{ memo.userName }}</td>
-          <td>{{ memo.companyCode }}</td>
-          <td>{{ memo.transactionCode }}</td>
-        </tr>
-      </tbody>
-    </table>
+     <div class="section-header">
+       <h3>Credit & Debit Memos</h3>
+             <label>
+        From:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateFrom"
+          (change)="applyFilters(activeTab)"
+          class="form-control filter-input"
+        />
+      </label>
+      <label>
+        To:
+        <input
+          type="date"
+          [(ngModel)]="filters.dateTo"
+          (change)="applyFilters(activeTab)"
+          class="form-control filter-input"
+        />
+      </label>
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="filters.searchTerm"
+          (input)="applyFilters(activeTab)"
+        />
+      </div>
+    </div>
+    <div class="financial-sheet-table-wrapper">
+      <table class="financial-sheet-table">
+        <thead>
+          <tr>
+            <th>Memo ID</th>
+            <th>Vendor ID</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Description</th>
+            <th>Posting Date</th>
+            <th>Document Date</th>
+            <th>Fiscal Year</th>
+            <th>Line Number</th>
+            <th>Document Type</th>
+            <th>Quantity</th>
+            <th>Unit of Measure</th>
+            <th>Material Number</th>
+            <th>G/L Account</th>
+            <th>Posting Key</th>
+            <th>User Name</th>
+            <th>Company Code</th>
+            <th>Transaction Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="memos.length === 0">
+            <td colspan="19" class="no-data">No credit/debit memo data available.</td>
+          </tr>
+          <tr *ngFor="let memo of memos">
+            <td data-label="Memo ID">{{ memo.memoId }}</td>
+            <td data-label="Vendor ID">{{ memo.vendorId }}</td>
+            <td data-label="Type">{{ memo.type }}</td>
+            <td data-label="Amount">{{ memo.amount | number:'1.2-2' }}</td>
+            <td data-label="Currency">{{ memo.currency }}</td>
+            <td data-label="Description">{{ memo.description }}</td>
+            <td data-label="Posting Date">{{ memo.postingDate | date:'mediumDate' }}</td>
+            <td data-label="Document Date">{{ memo.documentDate | date:'mediumDate' }}</td>
+            <td data-label="Fiscal Year">{{ memo.fiscalYear }}</td>
+            <td data-label="Line Number">{{ memo.lineNumber }}</td>
+            <td data-label="Document Type">{{ memo.documentTypeRaw }}</td>
+            <td data-label="Quantity">{{ memo.quantity }}</td>
+            <td data-label="Unit of Measure">{{ memo.unitOfMeasure }}</td>
+            <td data-label="Material Number">{{ memo.materialNumber }}</td>
+            <td data-label="G/L Account">{{ memo.glAccount }}</td>
+            <td data-label="Posting Key">{{ memo.postingKey }}</td>
+            <td data-label="User Name">{{ memo.userName }}</td>
+            <td data-label="Company Code">{{ memo.companyCode }}</td>
+            <td data-label="Transaction Code">{{ memo.transactionCode }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </div>
