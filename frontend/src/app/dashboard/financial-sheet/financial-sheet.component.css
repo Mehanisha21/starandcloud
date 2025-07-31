@@ -1,5 +1,5 @@
 .financial-sheet-container {
-  max-width: 1200px; /* Adjusted max-width for better horizontal space utilization */
+  max-width: 1100px; /* Adjusted max-width for better horizontal space utilization */
   margin: auto;
   padding: 24px;
   background: var(--main-content);

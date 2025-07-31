@@ -5,6 +5,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CommonModule } from '@angular/common'; // Correct import for CommonModule
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule} from '@angular/forms'; // Import if needed
+
 // Import all components that belong to this dashboard module
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
@@ -43,14 +44,14 @@ const routes: Routes = [
     DashboardHomeComponent,
     FinancialSheetComponent,
     ProfileComponent,
-    GoodsReceiptComponent, // Ensure GoodsReceiptComponent is declared here
+    GoodsReceiptComponent,
+   // Ensure GoodsReceiptComponent is declared here
   ],
   imports: [
     CommonModule, 
     RouterModule.forChild(routes),
     NgxChartsModule,
-    FormsModule
-    
+    FormsModule,
   ]
 })
 export class DashboardModule { }
