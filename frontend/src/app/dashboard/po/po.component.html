@@ -1,7 +1,9 @@
 <div class="po-container">
+  
+  <!-- Filters (Sticky) -->
   <div class="po-header-filters-wrapper">
     <div class="po-filters">
-       <h2>Purchase Orders (PO)</h2>
+      <h2>Purchase Orders (PO)</h2>
       <!-- Date range filter -->
       <label>
         From:
@@ -21,35 +23,51 @@
           class="form-control filter-input"
         />
       </label>
-     <div class="search-bar">
-         <input
-        type="text"
-        placeholder="Search..."
-        [(ngModel)]="filters.searchTerm"
-        (input)="applyFilters()"/>
-     </div>
+
+      <label for="sortFieldSelect" class="sort-label">Sort by: <select id="sortFieldSelect"
+                class="sort-dropdown"
+                [(ngModel)]="selectedSortField"
+                (change)="onSortFieldChange()">
+          <option *ngFor="let field of sortFields" [value]="field.value">{{ field.label }}</option>
+        </select>
+      </label>
+      <button type="button" class="sort-direction-btn" (click)="toggleSortDirection()" title="Toggle Asc/Desc">
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </button>
+      <!-- Search -->
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search..."
+          [(ngModel)]="filters.searchTerm"
+          (input)="applyFilters()"
+        />
+      </div>
     </div>
   </div>
 
+  <!-- Loading -->
   <div *ngIf="isLoading" class="loading-message">
     Loading Purchase Orders...
   </div>
 
+  <!-- Error -->
   <div *ngIf="!isLoading && errorMsg" class="alert alert-warning">
     {{ errorMsg }}
   </div>
 
+  <!-- Table -->
   <ng-container *ngIf="!isLoading && !errorMsg && purchaseOrders.length > 0">
-    <div class="table-responsive">
-      <table class="table po-table">
+    <div class="table-container">
+      <table class="po-table">
         <thead>
-          <tr >
+          <tr>
             <th>PO Number</th>
             <th>Vendor ID</th>
             <th>Order Type</th>
             <th>Document Date</th>
             <th>Total Value</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
           <tr *ngFor="let po of filteredPurchaseOrders">
@@ -64,7 +82,9 @@
     </div>
   </ng-container>
 
+  <!-- No Data -->
   <div *ngIf="!isLoading && noDataFound && !errorMsg" class="alert alert-info no-data-msg">
     No Purchase Order data available for this vendor in SAP.
   </div>
+
 </div>

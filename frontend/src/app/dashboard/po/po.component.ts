@@ -22,6 +22,16 @@ export class POComponent implements OnInit {
     searchTerm: ''
   };
 
+  sortFields = [
+    { value: 'Ebeln', label: 'PO Number' },
+    { value: 'Lifnr', label: 'Vendor ID' },
+    { value: 'Bstyp', label: 'Order Type' },
+    { value: 'Bedat', label: 'Document Date' },
+    { value: 'Netwr', label: 'Total Value' }
+  ];
+  selectedSortField = 'Ebeln';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   constructor(
     private poService: PoService,
     private authService: AuthService
@@ -48,6 +58,7 @@ export class POComponent implements OnInit {
       return;
     }
 
+    
     this.poService.getPOByVendor(vendorId).subscribe({
       next: (response: any) => {
         if (response?.success && Array.isArray(response.data)) {
@@ -73,15 +84,16 @@ export class POComponent implements OnInit {
   }
 
   applyFilters(): void {
-    if (!this.purchaseOrders || this.purchaseOrders.length === 0) {
+    if (!this.purchaseOrders.length) {
       this.filteredPurchaseOrders = [];
       this.noDataFound = true;
       return;
     }
 
     let filtered = [...this.purchaseOrders];
-    const term = this.filters.searchTerm?.trim().toLowerCase();
+    const term = this.filters.searchTerm.trim().toLowerCase();
 
+    // Search filter
     if (term) {
       filtered = filtered.filter(po =>
         (po.Ebeln && po.Ebeln.toLowerCase().includes(term)) ||
@@ -90,37 +102,51 @@ export class POComponent implements OnInit {
       );
     }
 
-    // Parse dateFrom and dateTo inputs
+    // Date filter
     const from = this.filters.dateFrom ? new Date(this.filters.dateFrom) : null;
     const to = this.filters.dateTo ? new Date(this.filters.dateTo) : null;
+    if (from) from.setHours(0, 0, 0, 0);
+    if (to) to.setHours(23, 59, 59, 999);
 
-    // Normalize start/end of day
-    if (from) {
-      from.setHours(0, 0, 0, 0);
-    }
-    if (to) {
-      to.setHours(23, 59, 59, 999);
-    }
+    if (from) filtered = filtered.filter(po => this.parseODataDate(po.Bedat) >= from);
+    if (to) filtered = filtered.filter(po => this.parseODataDate(po.Bedat) <= to);
 
-    if (from) {
-      filtered = filtered.filter(po => {
-        // Parse Bedat properly, you can keep your parse function or simplify if Bedat is ISO string
-        // Here assuming Bedat is ISO string or parseable as Date
-        const poDate = this.parseODataDate(po.Bedat);
-        return poDate >= from;
-      });
-    }
-    if (to) {
-      filtered = filtered.filter(po => {
-        const poDate = this.parseODataDate(po.Bedat);
-        return poDate <= to;
-      });
-    }
-
+    // Set then sort
     this.filteredPurchaseOrders = filtered;
-    this.noDataFound = filtered.length === 0;
+    this.sortData();
+    this.noDataFound = this.filteredPurchaseOrders.length === 0;
   }
 
+  onSortFieldChange(): void {
+    this.sortData();
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortData();
+  }
+
+  private sortData(): void {
+    const column = this.selectedSortField;
+    const direction = this.sortDirection;
+
+    this.filteredPurchaseOrders.sort((a, b) => {
+      let valA = a[column];
+      let valB = b[column];
+
+      if (column === 'Bedat') {
+        valA = this.parseODataDate(a.Bedat).getTime();
+        valB = this.parseODataDate(b.Bedat).getTime();
+      }
+
+      if (typeof valA === 'string') valA = valA.toLowerCase();
+      if (typeof valB === 'string') valB = valB.toLowerCase();
+
+      if (valA < valB) return direction === 'asc' ? -1 : 1;
+      if (valA > valB) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
   private parseODataDate(odataDate: string | undefined): Date {
     if (!odataDate) return new Date(0);
     const match = odataDate.match(/\/Date\((\d+)([+-]\d{4})?\)\//);
