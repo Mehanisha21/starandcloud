@@ -29,6 +29,18 @@
           class="form-control filter-input"
         />
       </label>
+
+      <label for="sortFieldSelect" class="sort-label">Sort by: <select id="sortFieldSelect"
+                class="sort-dropdown"
+                [(ngModel)]="selectedSortField"
+                (change)="onSortFieldChange()">
+          <option *ngFor="let field of sortFields" [value]="field.value">{{ field.label }}</option>
+        </select>
+      </label>
+      <button type="button" class="sort-direction-btn" (click)="toggleSortDirection()" title="Toggle Asc/Desc">
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </button>
+
       <div class="search-bar">
         <input
           type="text"
@@ -39,6 +51,7 @@
       </div>
       <button class="export-pdf-btn" (click)="handleExportPdfClick()">Export PDF</button>
     </div>
+    
     <div class="financial-sheet-table-wrapper">
       <table class="financial-sheet-table">
         <thead>
@@ -106,6 +119,18 @@
           class="form-control filter-input"
         />
       </label>
+
+      <label for="sortFieldSelect" class="sort-label">Sort by: <select id="sortFieldSelect"
+                class="sort-dropdown"
+                [(ngModel)]="selectedSortField"
+                (change)="onSortFieldChange()">
+          <option *ngFor="let field of sortFields" [value]="field.value">{{ field.label }}</option>
+        </select>
+      </label>
+      <button type="button" class="sort-direction-btn" (click)="toggleSortDirection()" title="Toggle Asc/Desc">
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </button>
+
       <div class="search-bar">
         <input
           type="text"
@@ -131,10 +156,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngIf="payments.length === 0">
-            <td colspan="9" class="no-data">No payment or aging data available.</td>
-          </tr>
-          <tr *ngFor="let payment of payments">
+          <tr *ngFor="let payment of filteredPayments">
             <td data-label="Document Number">{{ payment.documentNumber }}</td>
             <td data-label="Vendor ID">{{ payment.vendorId }}</td>
             <td data-label="Billing Date">{{ payment.billingDate | date:'mediumDate' }}</td>
@@ -172,6 +194,18 @@
           class="form-control filter-input"
         />
       </label>
+
+      <label for="sortFieldSelect" class="sort-label">Sort by: <select id="sortFieldSelect"
+                class="sort-dropdown"
+                [(ngModel)]="selectedSortField"
+                (change)="onSortFieldChange()">
+          <option *ngFor="let field of sortFields" [value]="field.value">{{ field.label }}</option>
+        </select>
+      </label>
+      <button type="button" class="sort-direction-btn" (click)="toggleSortDirection()" title="Toggle Asc/Desc">
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </button>
+        
       <div class="search-bar">
         <input
           type="text"
@@ -210,7 +244,7 @@
           <tr *ngIf="memos.length === 0">
             <td colspan="19" class="no-data">No credit/debit memo data available.</td>
           </tr>
-          <tr *ngFor="let memo of memos">
+          <tr *ngFor="let memo of filteredMemos">
             <td data-label="Memo ID">{{ memo.memoId }}</td>
             <td data-label="Vendor ID">{{ memo.vendorId }}</td>
             <td data-label="Type">{{ memo.type }}</td>

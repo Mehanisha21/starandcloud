@@ -10,14 +10,30 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class GoodsReceiptComponent implements OnInit {
   goodsReceipts: GoodsReceipt[] = [];           // All goods receipts loaded from API
-  filteredGoodsReceipts: GoodsReceipt[] = [];   // Receipt list after filtering
+  filteredGoodsReceipts: GoodsReceipt[] = [];   // List after filtering & sorting
   errorMsg = '';
   isLoading = false;
+
+  // Filters
   filters = {
     dateFrom: '',
     dateTo: '',
     searchTerm: ''
   };
+
+  // Sorting
+  sortFields = [
+    { label: 'Document No', value: 'documentNo' },
+    { label: 'Vendor ID', value: 'vendorId' },
+    { label: 'Posting Date', value: 'postingDate' },
+    { label: 'Document Date', value: 'documentDate' },
+    { label: 'Document Type', value: 'documentType' },
+    { label: 'Purchase Order No', value: 'purchaseOrderNo' },
+    { label: 'Material No', value: 'materialNo' }
+  ];
+  selectedSortField: string = 'postingDate'; // default sort
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   vendorLifnr: string | null = null;
 
   constructor(
@@ -49,7 +65,7 @@ export class GoodsReceiptComponent implements OnInit {
     this.goodsReceiptService.getGoodsReceipts(this.vendorLifnr).subscribe({
       next: (receipts: GoodsReceipt[]) => {
         this.goodsReceipts = receipts || [];
-        this.applyFilters();
+        this.applyFilters(); // filters will also call sorting
         this.isLoading = false;
         if (this.goodsReceipts.length === 0) {
           this.errorMsg = 'No Goods Receipts available for this vendor ID.';
@@ -72,6 +88,8 @@ export class GoodsReceiptComponent implements OnInit {
 
   applyFilters(): void {
     let filtered = [...this.goodsReceipts];
+
+    // Text search filter
     const term = this.filters.searchTerm?.trim().toLowerCase();
     if (term) {
       filtered = filtered.filter(gr =>
@@ -84,8 +102,10 @@ export class GoodsReceiptComponent implements OnInit {
       );
     }
 
+    // Date range filter
     const from = this.filters.dateFrom ? new Date(this.filters.dateFrom) : null;
     const to   = this.filters.dateTo ? new Date(this.filters.dateTo) : null;
+
     if (from) {
       filtered = filtered.filter(gr => {
         const postingDate = typeof gr.postingDate === 'string' ? new Date(gr.postingDate) : gr.postingDate;
@@ -99,6 +119,50 @@ export class GoodsReceiptComponent implements OnInit {
       });
     }
 
-    this.filteredGoodsReceipts = filtered;
+    // Apply sorting after filtering
+    this.filteredGoodsReceipts = this.sortData(filtered);
+  }
+
+  // ------ Sorting Functions --------
+
+  sortData(data: GoodsReceipt[]): GoodsReceipt[] {
+    const field = this.selectedSortField;
+    const direction = this.sortDirection;
+
+    return data.sort((a, b) => {
+      const valA = (a as any)[field];
+      const valB = (b as any)[field];
+
+      if (valA == null && valB == null) return 0;
+      if (valA == null) return direction === 'asc' ? -1 : 1;
+      if (valB == null) return direction === 'asc' ? 1 : -1;
+
+      // Handle date fields separately
+      if (field.includes('Date')) {
+        const dateA = new Date(valA).getTime();
+        const dateB = new Date(valB).getTime();
+        return direction === 'asc' ? dateA - dateB : dateB - dateA;
+      }
+
+      // For non-date fields, string/numeric comparison
+      if (typeof valA === 'number' && typeof valB === 'number') {
+        return direction === 'asc' ? valA - valB : valB - valA;
+      } else {
+        return direction === 'asc'
+          ? String(valA).localeCompare(String(valB))
+          : String(valB).localeCompare(String(valA));
+      }
+    });
+  }
+
+  onSortFieldChange(): void {
+    this.applyFilters(); // re-apply filters and sort
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.applyFilters(); // re-apply sorting
   }
 }
+
+

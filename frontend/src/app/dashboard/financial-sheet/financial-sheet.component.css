@@ -30,18 +30,24 @@
 
 .section-header {
   display: flex;
-  justify-content: space-between;
+  position: sticky;
+  top: 0;
   align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  z-index: 30; /* above table header */
+  padding: 12px 0;
   margin-bottom: 15px;
   border-bottom: 2px solid #3498db;
-  padding-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 .section-header h3 {
-  margin: 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--header-bg);
-  text-align: left;
+  color: var(--header-bg, #3498db);
+  margin: 0;
+  flex-grow: 1;
 }
 .export-pdf-btn {
   background-color: var(--accent);
@@ -73,11 +79,11 @@
 
 /* Common filter input styles */
 .filter-input {
-  padding: 6px 12px;
+  padding: 6px 10px;
   font-size: 1rem;
   border-radius: 15px;
   border: 1.5px solid #ccc;
-  min-width: 130px;
+  min-width: 100px;
   transition: border-color 0.3s ease;
   outline: none;
   box-sizing: border-box;
@@ -93,7 +99,7 @@
   border-radius: 15px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   outline: none;
-  margin-top: 15px; 
+  margin-top: 15px;
 }
 
 /* Focus styles for inputs */
@@ -118,19 +124,82 @@
   }
 }
 
+
+/* Sort controls styling */
+.sort-label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--header-bg);
+  display: flex;
+  flex-direction: column; /* ✅ stack label above input */
+  align-items: flex-start; /* align to left */
+  gap: 3px; 
+}
+
+.sort-dropdown {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border-radius: 15px;
+  border: 1.5px solid #ccc;
+  min-width: 130px;
+  transition: border-color 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sort-dropdown:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+.sort-direction-btn {
+  border: 1.5px solid #ccc;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2c3e50;
+  margin-top: 15px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.sort-direction-btn:hover {
+  background-color: #3498db;
+  color: #fff;
+  border-color: #3498db;
+}
+
+.sort-direction-btn:focus {
+  outline: none;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.3);
+}
+
+
+
+
 .financial-sheet-table-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  overflow: auto; /* both horizontal + vertical */
+  max-height: 450px;
 }
 
 .financial-sheet-table {
   width: 100%;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
   box-shadow: 0 0 10px rgb(0 0 0 / 0.05);
   border-radius: 8px;
   overflow: hidden;
   background-color: var(--table-bg, #fff);
+  font-size: 0.95rem;
+  color: var(--table-text, #2c3e50);
 }
 
 .financial-sheet-table thead tr {
@@ -140,24 +209,26 @@
 }
 
 .financial-sheet-table th {
-  padding: 12px 18px;
+  position: sticky;
+  top: 0;
+  background-color: var(--header-bg, #3498db);
+  color: var(--header-text, #fff);
   font-weight: 600;
   font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  user-select: none;
   text-align: left;
+  padding: 12px 18px;
+  border-bottom: 2px solid #2980b9;
+  z-index: 5; /* ensure above body rows */
+  white-space: nowrap;
 }
 
 .financial-sheet-table td {
   padding: 12px 18px;
-  vertical-align: middle;
+  border-bottom: 1px solid #e1e8f0;
   font-size: 0.95rem;
   color: var(--table-text, #2c3e50);
-  border-bottom: 1px solid #e1e8f0;
-  text-align: left;
-  box-sizing: border-box;
   white-space: nowrap;
+  text-align: start;
 }
 
 .financial-sheet-table tbody tr:last-child td {

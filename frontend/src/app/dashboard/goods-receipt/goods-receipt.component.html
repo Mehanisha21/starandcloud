@@ -20,6 +20,20 @@
           class="form-control filter-input"
         />
       </label>
+
+
+      <label for="sortFieldSelect" class="sort-label">Sort by: <select id="sortFieldSelect"
+                class="sort-dropdown"
+                [(ngModel)]="selectedSortField"
+                (change)="onSortFieldChange()">
+          <option *ngFor="let field of sortFields" [value]="field.value">{{ field.label }}</option>
+        </select>
+      </label>
+      <button type="button" class="sort-direction-btn" (click)="toggleSortDirection()" title="Toggle Asc/Desc">
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </button>
+      <!-- Search -->
+
       <div class="search-bar">
         <input
           type="text"
@@ -49,7 +63,7 @@
             <th>Posting Date</th>
             <th>Document Date</th>
             <th>Document Type</th>
-            <th>Purchase Order No</th>
+            <th>PO No</th>
             <th>PO Item</th>
             <th>Material No</th>
             <th>Description</th>
